@@ -10,11 +10,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 
 import { MainComponent } from './main/main.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     NavigationComponent,
-    MainComponent
+    MainComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { MainComponent } from './main/main.component';
   ],
   exports:[
     NavigationComponent,
-    MainComponent
+    MainComponent,
+    FooterComponent
   ]
 })
 export class CoreModule { }
