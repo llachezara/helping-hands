@@ -1,3 +1,7 @@
+.sidenav-container{
+  z-index: 2;
+}
+
 .sidenav {
   width: 200px;
 }

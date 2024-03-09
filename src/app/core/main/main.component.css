@@ -1,0 +1,9 @@
+.content{
+    display: flex;
+    min-height: 90vh;
+    justify-content: center;
+    padding: 50px;
+    position: relative;
+    z-index: 1;
+    background-color: white ;
+}
