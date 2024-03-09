@@ -1,0 +1,12 @@
+.header img{
+    margin: auto;
+    display: block;
+}
+
+.container {
+    padding: 100px;
+}
+.container p{
+    font-size: 1.2em;
+    margin-bottom: em;
+}
