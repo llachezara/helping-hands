@@ -7,6 +7,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { LoginComponent } from './login/login.component';
+import { UserRoutingModule } from './user-routing.module';
 
 
 
@@ -16,6 +17,7 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     CommonModule,
+    UserRoutingModule,
     FormsModule,
     MatButtonModule,
     MatCardModule,
