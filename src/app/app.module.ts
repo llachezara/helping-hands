@@ -15,6 +15,15 @@ import { HomeComponent } from './home/home.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+const firebaseConfig = {
+  apiKey: "AIzaSyBKNp0I6E7jMFStDfAVd8LRB3G5-WdkCew",
+  authDomain: "helping-hands-85ecf.firebaseapp.com",
+  projectId: "helping-hands-85ecf",
+  storageBucket: "helping-hands-85ecf.appspot.com",
+  messagingSenderId: "446214338847",
+  appId: "1:446214338847:web:9e21fb56d07fd1f8dd582a"
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +33,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   ],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(environment as FirebaseOptions),
+    AngularFireModule.initializeApp(firebaseConfig),//environment is not of type FirebaseOptions, TODO: Use environment.firebaseConfig
     UserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

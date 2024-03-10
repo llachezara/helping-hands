@@ -8,6 +8,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { LoginComponent } from './login/login.component';
 import { UserRoutingModule } from './user-routing.module';
+import { AuthService } from './auth.service';
 
 
 
@@ -24,5 +25,7 @@ import { UserRoutingModule } from './user-routing.module';
     MatInputModule,
     MatFormFieldModule
   ]
+  ],
+  providers:[AuthService]
 })
 export class UserModule { }
