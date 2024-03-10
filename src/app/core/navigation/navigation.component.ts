@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AsyncPipe, NgIf } from '@angular/common';
+import { AuthService } from 'src/app/user/auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -17,4 +18,13 @@ export class NavigationComponent {
       map(result => result.matches),
       shareReplay()
     );
+
+  get loggedInUser(): boolean{
+    return this.auth.getUser();
+  }
+  constructor(private auth: AuthService){}
+
+  logout(){
+    this.auth.logout();
+  }
 }
