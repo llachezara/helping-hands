@@ -7,6 +7,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { UserRoutingModule } from './user-routing.module';
 import { AuthService } from './auth.service';
 
@@ -15,6 +16,7 @@ import { AuthService } from './auth.service';
 @NgModule({
   declarations: [
     LoginComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,6 @@ import { AuthService } from './auth.service';
     MatCardModule,
     MatInputModule,
     MatFormFieldModule
-  ]
   ],
   providers:[AuthService]
 })

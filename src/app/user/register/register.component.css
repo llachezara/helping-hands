@@ -1,0 +1,15 @@
+mat-card {
+    width: 35em;
+    height: 25em;
+    margin: 2em auto;
+    text-align: center;
+    border-radius: 20px;
+}
+
+mat-card h2{
+    font-size: 25px;
+}
+
+mat-form-field {
+   display: block;
+}

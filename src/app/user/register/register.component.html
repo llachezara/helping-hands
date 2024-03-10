@@ -1,0 +1,53 @@
+<mat-card>
+  <mat-card-content>
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+      <h2>Register</h2>
+      <mat-error *ngIf="">
+        The username and password were not recognized
+      </mat-error>
+      <mat-form-field>
+        <mat-label>Enter email</mat-label>
+        <input matInput name="email" required ngModel #email="ngModel" />
+        <mat-error *ngIf="email.invalid">
+          Please provide a valid email address
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Enter password</mat-label>
+        <input
+          matInput
+          type="password"
+          name="password"
+          required
+          ngModel
+          #password="ngModel"
+        />
+        <mat-error *ngIf="password.invalid">
+          Please provide a valid password
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Repeat password</mat-label>
+        <input
+          matInput
+          type="password"
+          name="rePassword"
+          required
+          ngModel
+          #rePassword="ngModel"
+        />
+        <mat-error *ngIf="rePassword.invalid">
+          Passwords must match
+        </mat-error>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="!registerForm.form.valid"
+      >
+        Register
+      </button>
+      <!--  -->
+    </form>
+  </mat-card-content>
+</mat-card>

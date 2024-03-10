@@ -20,4 +20,31 @@ export class AuthService {
         this.errorMessage = error.message;
       });
   }
+
+  register(credentials: {email: string , password: string}) {
+
+    const {email, password} = credentials;
+    
+     this.fireAuth.createUserWithEmailAndPassword(email, password)
+      .then((data) => {
+        return data.user?.getIdToken();
+      })
+      .then((token)=> {
+        localStorage.setItem('user', JSON.stringify(token))
+        this.router.navigate(['/home']);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }
 }
+
+// this.fireAuth.idToken.subscribe({
+//   next:(data)=>{
+//     console.log('2', data);
+//     //
+//   },
+//   error:(err)=>{
+//     console.log(err);
+//   }
+// })
