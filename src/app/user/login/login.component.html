@@ -12,7 +12,7 @@
          name="email" 
          required 
          ngModel
-         #email
+         #email="ngModel"
          />
         <mat-error *ngIf="email.invalid "> Please provide a valid email address </mat-error>
       </mat-form-field>
