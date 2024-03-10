@@ -1,0 +1,7 @@
+button{
+   margin-right:10px;
+}
+
+button:hover{
+ background-color: #d3ded2 ;
+}
