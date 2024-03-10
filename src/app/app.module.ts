@@ -9,6 +9,8 @@ import { FirebaseOptions } from 'firebase/app';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CoreModule } from './core/core.module';
+import { UserModule } from './user/user.module';
+
 import { HomeComponent } from './home/home.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -23,9 +25,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment as FirebaseOptions),
+    UserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CoreModule
+    CoreModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

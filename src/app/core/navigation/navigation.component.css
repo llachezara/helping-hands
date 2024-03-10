@@ -14,4 +14,9 @@
   position: sticky;
   top: 0;
   z-index: 1;
+  height: 10vh;
+}
+
+.auth-container{
+  margin-left: 70vw;
 }

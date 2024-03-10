@@ -6,11 +6,15 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
+
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 
 import { MainComponent } from './main/main.component';
 import { FooterComponent } from './footer/footer.component';
+
+import { SharedModule } from '../shared/shared.module';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +29,8 @@ import { FooterComponent } from './footer/footer.component';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    SharedModule
   ],
   exports:[
     NavigationComponent,
