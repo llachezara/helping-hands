@@ -12,7 +12,9 @@ export class AuthService {
 
      this.fireAuth.signInWithEmailAndPassword(email, password)
       .then((data) => {
-        console.log(data);
+        console.log("Login", data);
+        this.router.navigate(['/home']);
+
         this.fireAuth.currentUser
         .then((user)=>{
           console.log('CurrentUser', user)
@@ -55,7 +57,10 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('user');
-    this.fireAuth.signOut().then(()=> console.log('LOGOUT'));
+    this.fireAuth.signOut().then(()=> {
+      console.log('LOGOUT');
+      this.router.navigate(['/home']);
+    });
   }
 
   getUser(){
