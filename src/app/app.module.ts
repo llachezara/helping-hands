@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AngularFireModule } from '@angular/fire/compat'
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
-import { FirebaseOptions } from 'firebase/app';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CoreModule } from './core/core.module';
@@ -33,7 +33,8 @@ const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(firebaseConfig),//environment is not of type FirebaseOptions, TODO: Use environment.firebaseConfig
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),//environment is not of type FirebaseOptions, TODO: Use environment.firebaseConfig
+    provideAuth(() => getAuth()),
     UserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
