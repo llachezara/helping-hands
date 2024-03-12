@@ -1,61 +1,24 @@
 import { Injectable } from '@angular/core';
-import {Auth} from '@angular/fire/auth';
+import {Auth, createUserWithEmailAndPassword} from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { Observable, from } from 'rxjs';
 
 @Injectable()
 export class AuthService {
   errorMessage: string | undefined;
 
-  constructor(private auth: Auth, private router: Router) {
+  constructor(private firebaseAuth: Auth, private router: Router) {
   }
 
-  login(credentials: {email: string , password: string}) {
-    const {email, password} = credentials;
+  login(email: string, password: string) {
 
-    //  this.fireAuth.signInWithEmailAndPassword(email, password)
-    //   .then((data) => {
-    //     console.log("Login", data);
-    //     this.router.navigate(['/home']);
-
-    //     this.fireAuth.currentUser
-    //     .then((user)=>{
-    //       console.log('CurrentUser', user)
-    //     })
-    //     .catch((err)=>{
-    //       console.log(err);
-    //     })
-        
-
-    //   })
-    //   .then((token)=> {
-    //     console.log(token);
-    //     localStorage.setItem('user', JSON.stringify(token))
-    //     this.router.navigate(['/home']);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.message);
-    //     this.errorMessage = error.message;
-    //   });
-
-       
   }
 
-  register(credentials: {email: string , password: string}) {
-
-    const {email, password} = credentials;
-    
-    //  this.fireAuth.createUserWithEmailAndPassword(email, password)
-    //   .then((data) => {
-    //     return data.user?.getIdToken();
-    //   })
-    //   .then((token)=> {
-    //     localStorage.setItem('user', JSON.stringify(token))
-    //     this.router.navigate(['/home']);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.message);
-    //   });
-
+  register(email: string, password: string): Observable<void> {
+    const promise = createUserWithEmailAndPassword(this.firebaseAuth, email, password)
+      .then((data)=> console.log(data));
+      
+    return from(promise);
   }
 
   logout() {

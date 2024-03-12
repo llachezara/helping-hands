@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -9,24 +10,27 @@ import { AuthService } from '../auth.service';
 })
 export class RegisterComponent {
   @ViewChild('registerForm') form!: NgForm;
-  //TODO: Add errorMessage property
-  userCredentials: {email: string, password: string} = {email:'', password:''};
   // passMismatch: boolean = false;
  
-  constructor(private auth: AuthService){}
+  constructor(private authService: AuthService, private router: Router){}
   onSubmit() {
      //TODO: Validate form
-     this.userCredentials = this.form.value;
+     const {email, password} = this.form.value;
      const rePassword = this.form.value.rePassword;
-     const password = this.userCredentials.password;
 
      if (password !== rePassword) {
-        console.log('MissMatch');
-        // return this.passMismatch = true;
-     }
+        console.log(password, rePassword,'MissMatch');
+     } else {
 
-     console.log(this.form.value);
-     this.auth.register(this.userCredentials);
-    //  return this.passMismatch
+        this.authService.register(email, password).subscribe({
+          next: ()=> {
+            console.log('Registered');
+            this.router.navigate(['/home']);
+          },
+          error: (error)=> {
+            console.log(error);
+          }
+      });
+     }
   }
 }
