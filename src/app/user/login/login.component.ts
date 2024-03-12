@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
  @ViewChild('loginForm') form!: NgForm;
 
+ errorMessage: string | null = null;
  constructor(private auth: AuthService, private router: Router){}
 
  onSubmit(){
@@ -20,9 +21,11 @@ export class LoginComponent {
     this.auth.login(email, password).subscribe({
       next:()=>{
         console.log('Login');
+        this.errorMessage = null;
         this.router.navigate(['/home']);
       },
       error:(error)=>{
+        this.errorMessage = error.message;
       }
     });
  }
