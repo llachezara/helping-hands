@@ -1,6 +1,7 @@
 import { Component, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,15 +10,20 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent {
  @ViewChild('loginForm') form!: NgForm;
- //TODO: Add errorMessage property
- userCredentials: {email: string , password: string} = {email:'', password:''};
 
- constructor(private auth: AuthService){}
+ constructor(private auth: AuthService, private router: Router){}
 
  onSubmit(){
     //TODO: Validate form
-    this.userCredentials = this.form.value;
-    console.log(this.form.value);
-    this.auth.login(this.userCredentials);
+    const {email, password} = this.form.value;
+
+    this.auth.login(email, password).subscribe({
+      next:()=>{
+        console.log('Login');
+        this.router.navigate(['/home']);
+      },
+      error:(error)=>{
+      }
+    });
  }
 }

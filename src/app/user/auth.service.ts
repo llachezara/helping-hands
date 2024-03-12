@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Auth, createUserWithEmailAndPassword} from '@angular/fire/auth';
+import {Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Observable, from } from 'rxjs';
 
@@ -7,17 +7,19 @@ import { Observable, from } from 'rxjs';
 export class AuthService {
   errorMessage: string | undefined;
 
-  constructor(private firebaseAuth: Auth, private router: Router) {
-  }
+  constructor(private firebaseAuth: Auth, private router: Router) {}
 
-  login(email: string, password: string) {
-
+  login(email: string, password: string): Observable<void> {
+     const promise = signInWithEmailAndPassword(this.firebaseAuth, email, password)
+      .then(()=>{});
+     
+     return from(promise);
   }
 
   register(email: string, password: string): Observable<void> {
     const promise = createUserWithEmailAndPassword(this.firebaseAuth, email, password)
       .then((data)=> console.log(data));
-      
+
     return from(promise);
   }
 
