@@ -1,3 +1,6 @@
+<div *ngIf="errorMessage">
+  {{errorMessage}}
+</div> 
 <mat-card>
   <mat-card-content>
     <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
