@@ -5,6 +5,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { AuthService } from 'src/app/user/auth.service';
 import { User } from 'firebase/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -25,9 +26,14 @@ export class NavigationComponent {
     
     return !!this.auth.currentUser();
   }
-  constructor(private auth: AuthService){}
+  constructor(private auth: AuthService, private router: Router){}
 
   logout(){
-    this.auth.logout();
+    this.auth.logout().subscribe({
+      next:()=>{ 
+        this.router.navigate(['/home']);
+        console.log('Logout');
+      }
+    });
   }
 }

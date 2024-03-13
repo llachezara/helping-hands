@@ -25,12 +25,9 @@ export class AuthService {
     return from(promise);
   }
 
-  logout() {
-    // localStorage.removeItem('user');
-    // this.fireAuth.signOut().then(()=> {
-    //   console.log('LOGOUT');
-    //   this.router.navigate(['/home']);
-    // });
+  logout(): Observable<void> {
+    const promise = this.firebaseAuth.signOut();
+    return from(promise);
   }
 
 }
