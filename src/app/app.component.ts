@@ -15,10 +15,8 @@ export class AppComponent implements OnInit{
 
     this.auth.user$.subscribe({
       next: (user) => {
-        
-        this.auth.currentUser.set({
-          email: user?.email!
-        })
+          let newUser: UserInterface | null = user ? {email: user.email!} : user;
+          this.auth.currentUser.set(newUser);
       }
     })
   }
