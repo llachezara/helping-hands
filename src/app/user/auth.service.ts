@@ -2,6 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import {Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, user} from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Observable, from } from 'rxjs';
+import { UserInterface } from '../types/User';
 
 @Injectable()
 export class AuthService {
@@ -32,8 +33,4 @@ export class AuthService {
     // });
   }
 
-}
-
-type UserInterface = {
-  email: string
 }

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AuthService } from './user/auth.service';
+import { UserInterface } from './types/User';
 
 @Component({
   selector: 'app-root',
