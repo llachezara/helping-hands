@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
-import {Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from '@angular/fire/auth';
+import { Injectable, signal } from '@angular/core';
+import {Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, user} from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Observable, from } from 'rxjs';
 
 @Injectable()
 export class AuthService {
-  errorMessage: string | undefined;
-
   constructor(private firebaseAuth: Auth, private router: Router) {}
 
+  user$ = user(this.firebaseAuth);
+  currentUser = signal<UserInterface | null | undefined>(undefined);
+  
   login(email: string, password: string): Observable<void> {
      const promise = signInWithEmailAndPassword(this.firebaseAuth, email, password)
       .then(()=>{});
@@ -31,18 +32,8 @@ export class AuthService {
     // });
   }
 
-  getUser(){
-
-    return !!localStorage.getItem('user');
-  }
 }
 
-// this.fireAuth.idToken.subscribe({
-//   next:(data)=>{
-//     console.log('2', data);
-//     //
-//   },
-//   error:(err)=>{
-//     console.log(err);
-//   }
-// })
+type UserInterface = {
+  email: string
+}

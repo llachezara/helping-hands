@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { AuthService } from 'src/app/user/auth.service';
+import { User } from 'firebase/auth';
 
 @Component({
   selector: 'app-navigation',
@@ -20,7 +21,9 @@ export class NavigationComponent {
     );
 
   get loggedInUser(): boolean{
-    return this.auth.getUser();
+    console.log(this.auth.currentUser());
+    
+    return !!this.auth.currentUser();
   }
   constructor(private auth: AuthService){}
 
