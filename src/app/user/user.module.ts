@@ -10,13 +10,15 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserRoutingModule } from './user-routing.module';
 import { AuthService } from './auth.service';
+import { MatchPasswordsDirective } from './directives/match-password.directive';
 
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    MatchPasswordsDirective
   ],
   imports: [
     CommonModule,

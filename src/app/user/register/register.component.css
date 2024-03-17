@@ -1,15 +1,43 @@
-mat-card {
-    width: 35em;
-    height: 25em;
+mat-card.outer {
+    width: 32em;
+    height: 27em;
     margin: 2em auto;
     text-align: center;
     border-radius: 20px;
+    justify-content: center;
 }
 
+.inner {
+    width: 28em;
+    height: auto;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 20px;
+}
 mat-card h2{
     font-size: 25px;
 }
 
 mat-form-field {
    display: block;
+   margin: 5px;
+}
+
+.error{
+    position: absolute;
+    overflow: visible;
+    top: 0;
+    right:-30rem;
+    width: 15rem;
+    height: 3rem;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    padding: 8px;
+    color: #D8000C;
+    background-color: #fdd0d0;
+    background-image: url('https://i.imgur.com/GnyDvKN.png');
+    background-repeat: no-repeat;
+	background-position: 8px center;
+    border-radius: 3px;
 }
