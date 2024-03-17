@@ -1,6 +1,6 @@
 mat-card {
     width: 30em;
-    height: 20em;
+    height: 21em;
     margin: 2em auto;
     text-align: center;
     border-radius: 20px;
@@ -12,6 +12,12 @@ mat-card h2{
 
 mat-form-field {
    display:block;
+   margin: 5px;
 }
+
+button{
+    margin-top:5px;
+}
+
 
 

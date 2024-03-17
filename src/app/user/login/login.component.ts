@@ -9,13 +9,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
- @ViewChild('loginForm') form!: NgForm;
+ @ViewChild('loginForm') form: NgForm | undefined;
 
  errorMessage: string | null = null;
  constructor(private auth: AuthService, private router: Router){}
 
  onSubmit(){
     //TODO: Validate form
+    if (!this.form) {
+      return
+    }
     const {email, password} = this.form.value;
 
     this.auth.login(email, password).subscribe({

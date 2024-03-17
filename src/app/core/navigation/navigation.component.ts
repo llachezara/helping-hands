@@ -22,7 +22,7 @@ export class NavigationComponent {
     );
 
   get loggedInUser(): boolean{
-    console.log(this.auth.currentUser());
+    //console.log(this.auth.currentUser());
     
     return !!this.auth.currentUser();
   }
