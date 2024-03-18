@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +36,7 @@ const firebaseConfig = {
     BrowserModule,
     provideFirebaseApp(() => initializeApp(firebaseConfig)),//environment is not of type FirebaseOptions, TODO: Use environment.firebaseConfig
     provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
     UserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

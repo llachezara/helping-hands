@@ -11,6 +11,7 @@ import { RegisterComponent } from './register/register.component';
 import { UserRoutingModule } from './user-routing.module';
 import { AuthService } from './auth.service';
 import { MatchPasswordsDirective } from './directives/match-password.directive';
+import { UserService } from './user.service';
 
 
 
@@ -29,6 +30,6 @@ import { MatchPasswordsDirective } from './directives/match-password.directive';
     MatInputModule,
     MatFormFieldModule
   ],
-  providers:[AuthService]
+  providers:[AuthService, UserService]
 })
 export class UserModule { }
