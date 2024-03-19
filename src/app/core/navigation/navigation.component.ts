@@ -24,7 +24,7 @@ export class NavigationComponent {
   get loggedInUser(): boolean{
     //console.log(this.auth.currentUser());
     
-    return !!this.auth.currentUser();
+    return !!this.auth.currentUser;
   }
   constructor(private auth: AuthService, private router: Router){}
 

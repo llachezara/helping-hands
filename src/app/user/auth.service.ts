@@ -9,7 +9,7 @@ export class AuthService {
   constructor(private firebaseAuth: Auth, private router: Router) {}
 
   user$ = user(this.firebaseAuth);
-  currentUser = signal<UserInterface | null | undefined>(undefined);
+  currentUser: UserInterface | null | undefined = undefined;
   
   login(email: string, password: string): Observable<void> {
      const promise = signInWithEmailAndPassword(this.firebaseAuth, email, password)
