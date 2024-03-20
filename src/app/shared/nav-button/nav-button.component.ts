@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class NavButtonComponent {
   @Input() text='';
+  @Input() color ='';
 }
