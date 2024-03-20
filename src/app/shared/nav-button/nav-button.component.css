@@ -1,0 +1,8 @@
+button{
+   margin-right:20px;
+   border: 1px solid lightblue;
+}
+
+button:hover{
+   background-color: #d3ded2 ;
+}

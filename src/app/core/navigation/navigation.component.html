@@ -27,13 +27,21 @@
       </button>
       <span>Helping Hands</span>
       <div *ngIf="!(loggedInUser | async)" class="guest-button-container">
-        <app-auth-button text="Login" routerLink="user/login" />
-        <app-auth-button text="Register" routerLink="user/register" />
+        <app-nav-button text="Login" routerLink="user/login" />
+        <app-nav-button text="Register" routerLink="user/register" />
       </div>
-      <div *ngIf="loggedInUser | async" [class]="menuToggled ? 'auth-button-container-small' : 'auth-button-container'">
-        <app-auth-button text="Create"  routerLink="campaigns/create" />
-        <app-auth-button text="Profile" routerLink="user/profile" />
-        <app-auth-button text="Logout" (click)="logout()" />
+      <div
+        *ngIf="loggedInUser | async"
+        [class]="
+          menuToggled ? 'nav-button-container-small' : 'nav-button-container'
+        "
+      >
+        <app-nav-button
+          text="Create"
+          routerLink="campaigns/create"
+        />
+        <app-nav-button text="Profile" routerLink="user/profile" />
+        <app-nav-button text="Logout" (click)="logout()" />
       </div>
     </mat-toolbar>
     <!-- Add Content Here -->

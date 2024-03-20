@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { AuthButtonComponent } from './auth-button/auth-button.component';
+import { NavButtonComponent } from './nav-button/nav-button.component';
 
 @NgModule({
   declarations: [
-    AuthButtonComponent
+    NavButtonComponent
   ],
   imports: [
     CommonModule,
     MatButtonModule
   ],
   exports: [
-    AuthButtonComponent
+    NavButtonComponent
   ]
 })
 export class SharedModule { }
