@@ -12,6 +12,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { AuthService } from './auth.service';
 import { MatchPasswordsDirective } from './directives/match-password.directive';
 import { UserService } from './user.service';
+import { isGuestGuard } from './guards/is-guest.guard';
 
 
 
@@ -30,6 +31,6 @@ import { UserService } from './user.service';
     MatInputModule,
     MatFormFieldModule
   ],
-  providers:[AuthService, UserService]
+  providers:[AuthService, UserService, isGuestGuard]
 })
 export class UserModule { }
