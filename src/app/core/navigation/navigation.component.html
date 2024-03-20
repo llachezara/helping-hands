@@ -25,11 +25,11 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>Helping Hands</span>
-      <div *ngIf="!loggedInUser" class="auth-container">
+      <div *ngIf="!(loggedInUser | async)" class="auth-container">
         <app-auth-button text="Login" routerLink="user/login" />
         <app-auth-button text="Register" routerLink="user/register" />
       </div>
-      <div *ngIf="loggedInUser" class="auth-container">
+      <div *ngIf="loggedInUser | async" class="auth-container">
         <app-auth-button text="Profile" routerLink="user/profile" />
         <app-auth-button text="Logout" (click)="logout()" />
       </div>

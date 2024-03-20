@@ -21,10 +21,8 @@ export class NavigationComponent {
       shareReplay()
     );
 
-  get loggedInUser(): boolean{
-    //console.log(this.auth.currentUser());
-    
-    return !!this.auth.currentUser;
+  get loggedInUser(){
+    return this.auth.user$;
   }
   constructor(private auth: AuthService, private router: Router){}
 
