@@ -17,6 +17,15 @@
   height: 10vh;
 }
 
-.auth-container{
+.guest-button-container{
   margin-left: 70vw;
+}
+
+.auth-button-container{
+  margin-left: 65vw;
+  overflow: hidden;
+}
+
+.auth-button-container-small{
+  margin-left: 52vw;
 }

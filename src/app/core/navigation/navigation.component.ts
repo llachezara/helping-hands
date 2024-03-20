@@ -6,6 +6,7 @@ import { AsyncPipe, NgIf } from '@angular/common';
 import { AuthService } from 'src/app/user/auth.service';
 import { User } from 'firebase/auth';
 import { Router } from '@angular/router';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-navigation',
@@ -14,6 +15,12 @@ import { Router } from '@angular/router';
 })
 export class NavigationComponent {
   private breakpointObserver = inject(BreakpointObserver);
+  menuToggled = false;
+
+  isToggled(drawer: MatSidenav){
+    this.menuToggled = !this.menuToggled;
+    console.log(drawer);
+  }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
