@@ -12,12 +12,8 @@ export class AppComponent implements OnInit{
 
   constructor(private auth: AuthService){}
   ngOnInit(): void {
-
-    this.auth.user$.subscribe({
-      next: (user) => {
-          let newUser: UserInterface | null = user ? {email: user.email!} : user;
-          this.auth.currentUser = newUser;
-      }
-    })
+    if (!this.auth.isLoggedIn) {
+      this.auth.logout();
+    }
   }
 }

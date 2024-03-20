@@ -40,6 +40,7 @@ export class RegisterComponent {
     this.authService.register(email, password).subscribe({
         next: (data)=> {
           console.log('Registered', data);
+          localStorage.setItem('user', JSON.stringify(data.user.email));
           this.createUser(data);
           this.errorMessage = null;
           this.router.navigate(['/home']);
