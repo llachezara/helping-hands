@@ -12,6 +12,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { TextFieldModule } from "@angular/cdk/text-field";
+import { CampaignService } from "./campaign.service";
 
 @NgModule({
     declarations: [
@@ -30,7 +31,7 @@ import { TextFieldModule } from "@angular/cdk/text-field";
         MatFormFieldModule,
         TextFieldModule
     ],
-    providers:[]
+    providers:[CampaignService]
 })
 export class CampaignModule{
 
