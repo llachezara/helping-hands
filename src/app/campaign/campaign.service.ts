@@ -8,6 +8,7 @@ import { AuthService } from '../user/auth.service';
 export class CampaignService{
     constructor(private firestore: Firestore, private authService: AuthService){}
     usersCollection: CollectionReference = collection(this.firestore, 'campaigns');
+    campaignsCollection: CollectionReference = collection(this.firestore, 'campaigns');
 
     createCampaign(data: object): Observable<DocumentReference> {
         const owner = JSON.parse(this.authService.currentUser!).uid;
@@ -19,6 +20,7 @@ export class CampaignService{
         //Get owner by uid and push campaign id to campaigns
         
         const promise = addDoc(this.usersCollection, <Campaign>{ 
+        const promise = addDoc(this.campaignsCollection, <Campaign>{ 
            ...data,
            owner
         });
