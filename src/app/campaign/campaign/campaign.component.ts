@@ -25,6 +25,9 @@ export class CampaignComponent {
   onSubmit():void{
     console.log(this.createForm.value)
 
-    this.campaignService.createCampaign(this.createForm.value).subscribe((data)=>console.log("Created campaign", data));
+    this.campaignService.createCampaign(this.createForm.value).subscribe({
+      next:(data)=>console.log("Created campaign", data),
+      error:(error)=> console.log('Error on create campaign', error)
+    });
   }
 }

@@ -15,7 +15,7 @@ export class AuthService {
     })
   );
 
-  get currentUser():string | null{
+  get currentUser(): string | null{
     console.log(localStorage.getItem('user'));
     
     return localStorage.getItem('user');
@@ -27,7 +27,7 @@ export class AuthService {
   
   login(email: string, password: string): Observable<void> {
      const promise = signInWithEmailAndPassword(this.firebaseAuth, email, password).then((data)=>{
-      localStorage.setItem('user', JSON.stringify(data.user.email));
+      localStorage.setItem('user', JSON.stringify({email: data.user.email, uid: data.user.uid}));
      });
      
      return from(promise);

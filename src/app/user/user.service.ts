@@ -11,12 +11,14 @@ export class UserService{
 
     createUserProfile(data: UserCredential): Observable<DocumentReference> {
         const promise = addDoc(this.usersCollection, <UserProfile>{ 
-           email: data.user.email 
+            uid: data.user.uid,
+            email: data.user.email 
         })
         return from(promise)
     }
 }
 
 type UserProfile = {
+    uid: string,
     email: string
 }
