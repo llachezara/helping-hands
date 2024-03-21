@@ -15,6 +15,7 @@ import { UserModule } from './user/user.module';
 import { HomeComponent } from './home/home.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { CampaignModule } from './campaign/campaign.module';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBKNp0I6E7jMFStDfAVd8LRB3G5-WdkCew",
@@ -37,6 +38,7 @@ const firebaseConfig = {
     provideFirebaseApp(() => initializeApp(firebaseConfig)),//environment is not of type FirebaseOptions, TODO: Use environment.firebaseConfig
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    CampaignModule,
     UserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
