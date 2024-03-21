@@ -1,1 +1,83 @@
-<p>campaign works!</p>
+<!-- <div *ngIf="errorMessage">
+  {{ errorMessage }}
+</div> -->
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Create Campaign</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <div class="general">
+        <h3>Title:</h3>
+        <mat-form-field class="longer-input">
+          <input matInput />
+        </mat-form-field>
+
+        <h3>Image URL:</h3>
+        <mat-form-field class="longer-input">
+          <input matInput />
+        </mat-form-field>
+
+        <h3>Description:</h3>
+        <mat-form-field class="bigger-textarea">
+          <textarea
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="6"
+            placeholder="Describe what help the person needs..."
+            class="description"
+            matInput
+          ></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="date">
+          <mat-label>Choose a start date</mat-label>
+          <input matInput [matDatepicker]="pickerStart" />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="pickerStart"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #pickerStart></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="date">
+          <mat-label>Choose an end date</mat-label>
+          <input matInput [matDatepicker]="pickerEnd" />
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="pickerEnd"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #pickerEnd></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="wrapper-personal">
+        <div class="personal">
+          <h3>Contact telephone:</h3>
+          <mat-form-field class="longer-input">
+            <input matInput />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Choose region</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let region of regions" [value]="region">
+                {{ region }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="actions">
+          <button
+            mat-raised-button
+            color="primary"
+          >
+            CREATE
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

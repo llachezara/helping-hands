@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./campaign.component.css']
 })
 export class CampaignComponent {
-
+  regions = ["Blagoevgrad", "Vidin"]
 }
