@@ -6,16 +6,16 @@
     <mat-card-title>Create Campaign</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form>
+    <form [formGroup]="createForm" (ngSubmit)="onSubmit()">
       <div class="general">
         <h3>Title:</h3>
         <mat-form-field class="longer-input">
-          <input matInput />
+          <input matInput formControlName="title"/>
         </mat-form-field>
 
         <h3>Image URL:</h3>
         <mat-form-field class="longer-input">
-          <input matInput />
+          <input matInput formControlName="imageUrl"/>
         </mat-form-field>
 
         <h3>Description:</h3>
@@ -28,12 +28,13 @@
             placeholder="Describe what help the person needs..."
             class="description"
             matInput
+            formControlName="description"
           ></textarea>
         </mat-form-field>
 
         <mat-form-field class="date">
           <mat-label>Choose a start date</mat-label>
-          <input matInput [matDatepicker]="pickerStart" />
+          <input matInput [matDatepicker]="pickerStart" formControlName="startDate"/>
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle
             matIconSuffix
@@ -44,7 +45,7 @@
 
         <mat-form-field class="date">
           <mat-label>Choose an end date</mat-label>
-          <input matInput [matDatepicker]="pickerEnd" />
+          <input matInput [matDatepicker]="pickerEnd" formControlName="endDate"/>
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle
             matIconSuffix
@@ -57,13 +58,13 @@
         <div class="personal">
           <h3>Contact telephone:</h3>
           <mat-form-field class="longer-input">
-            <input matInput />
+            <input matInput formControlName="phoneNumber"/>
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Choose region</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let region of regions" [value]="region">
+            <mat-select formControlName="region">
+              <mat-option *ngFor="let region of regions" [value]="region" >
                 {{ region }}
               </mat-option>
             </mat-select>

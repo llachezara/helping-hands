@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from '@angular/common';
 import { CampaignRoutingModule } from "./campaign-routing.module";
 import { CampaignComponent } from './campaign/campaign.component';
+import { ReactiveFormsModule } from "@angular/forms";
 
 import {  MatCardModule } from "@angular/material/card";
 import {MatInputModule} from '@angular/material/input';
@@ -19,6 +20,7 @@ import { TextFieldModule } from "@angular/cdk/text-field";
     imports:[
         CommonModule,
         CampaignRoutingModule,
+        ReactiveFormsModule,
         MatCardModule,
         MatInputModule,
         MatSelectModule,
