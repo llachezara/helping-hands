@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from '@angular/common';
 import { CampaignRoutingModule } from "./campaign-routing.module";
-import { CampaignComponent } from './campaign/campaign.component';
+import { CreateCampaignComponent } from './create-campaign/create-campaign.component';
 import { ReactiveFormsModule } from "@angular/forms";
 
 import {  MatCardModule } from "@angular/material/card";
@@ -16,7 +16,7 @@ import { CampaignService } from "./campaign.service";
 
 @NgModule({
     declarations: [
-    CampaignComponent
+    CreateCampaignComponent
   ],
     imports:[
         CommonModule,

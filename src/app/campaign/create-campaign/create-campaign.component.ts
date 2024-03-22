@@ -5,10 +5,10 @@ import { AuthService } from 'src/app/user/auth.service';
 
 @Component({
   selector: 'app-campaign',
-  templateUrl: './campaign.component.html',
-  styleUrls: ['./campaign.component.css']
+  templateUrl: './create-campaign.component.html',
+  styleUrls: ['./create-campaign.component.css']
 })
-export class CampaignComponent {
+export class CreateCampaignComponent {
   regions = ["Blagoevgrad", "Vidin"]
 
   createForm = this.fb.group({

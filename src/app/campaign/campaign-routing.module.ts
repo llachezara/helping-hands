@@ -1,10 +1,10 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { CampaignComponent } from "./campaign/campaign.component";
+import { CreateCampaignComponent } from "./create-campaign/create-campaign.component";
 
 const campaignRoutes: Routes = [
     {path:'campaigns', children:[
-        {path:'create', component: CampaignComponent}
+        {path:'create', component: CreateCampaignComponent}
     ]}
 ];
 
