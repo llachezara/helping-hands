@@ -8,8 +8,8 @@
   >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/home" (click)="drawer.toggle()">Home</a>
-      <a mat-list-item routerLink="/contacts" (click)="drawer.toggle()"
+      <a mat-list-item routerLink="/home" (click)="drawer.toggle()" (click)="isToggled(drawer)">Home</a>
+      <a mat-list-item routerLink="/contacts" (click)="drawer.toggle()" (click)="isToggled(drawer)"
         >Contacts</a
       >
     </mat-nav-list>
