@@ -1,0 +1,47 @@
+.container{
+    display: flex;
+    padding: 20px;
+    margin: -20px;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(241, 241, 241);
+    border-radius: 10px;
+}
+
+.header{
+    text-align: center;
+    margin: 20px;
+}
+
+h1{
+    font-size: 36px;
+}
+mat-paginator{
+    background-color: rgba(215, 213, 210, 0.838);
+    max-width:100%;
+    width: 100%;
+    border-radius: 10px;
+}
+mat-grid-list{
+    width: 80vw;
+    margin-top: 30px;
+    height: auto;
+    background-color: transparent;
+}
+mat-grid-tile{
+    background-color: transparent;
+}
+mat-card {
+    padding: 20px;
+    max-width: 90%;
+    max-height: 83%;
+    border-radius: 20px;
+}
+mat-card-header{
+    padding: 0;
+}

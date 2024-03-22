@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from '@angular/common';
 import { CampaignRoutingModule } from "./campaign-routing.module";
 import { CreateCampaignComponent } from './create-campaign/create-campaign.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReactiveFormsModule } from "@angular/forms";
 
 import {  MatCardModule } from "@angular/material/card";
@@ -12,11 +13,15 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { TextFieldModule } from "@angular/cdk/text-field";
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 import { CampaignService } from "./campaign.service";
 
 @NgModule({
     declarations: [
-    CreateCampaignComponent
+    CreateCampaignComponent,
+    DashboardComponent
   ],
     imports:[
         CommonModule,
@@ -29,7 +34,9 @@ import { CampaignService } from "./campaign.service";
         MatNativeDateModule,
         MatButtonModule,
         MatFormFieldModule,
-        TextFieldModule
+        TextFieldModule,
+        MatPaginatorModule,
+        MatGridListModule
     ],
     providers:[CampaignService]
 })
