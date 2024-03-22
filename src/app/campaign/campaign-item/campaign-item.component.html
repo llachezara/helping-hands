@@ -7,6 +7,6 @@
     <p>{{ item["description"] }}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>DETAILS</button>
+    <button mat-button routerLink="/campaigns/{{item['id']}}">DETAILS</button>
   </mat-card-actions>
 </mat-card>
