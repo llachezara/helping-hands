@@ -17,11 +17,13 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatGridListModule} from '@angular/material/grid-list';
 
 import { CampaignService } from "./campaign.service";
+import { CampaignItemComponent } from './campaign-item/campaign-item.component';
 
 @NgModule({
     declarations: [
     CreateCampaignComponent,
-    DashboardComponent
+    DashboardComponent,
+    CampaignItemComponent
   ],
     imports:[
         CommonModule,

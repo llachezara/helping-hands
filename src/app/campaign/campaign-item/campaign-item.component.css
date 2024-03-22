@@ -1,0 +1,32 @@
+mat-card {
+    display: flex;
+    align-items: left;
+    padding: 20px;
+    max-height: 32em;
+    max-width: 400px;
+    height: 32em;
+    border-radius: 20px;
+}
+mat-card-header{
+    line-height: 1.5;
+    padding: 0;
+    margin: 0;
+}
+
+mat-card-content {
+    align-self: left;
+    padding: 10px 0;
+}
+
+mat-card-actions{
+    padding: 0;
+}
+button {
+    background-color: #cfe1fb;/*#91ce8f*/
+    border-radius: 5px;
+}
+img{
+    display: block;
+    max-width: 400px;
+    border-radius: 10px;
+}
