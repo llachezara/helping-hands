@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CollectionReference, Firestore } from '@angular/fire/firestore';
-import { DocumentReference, addDoc, collection } from 'firebase/firestore';
+import { CollectionReference, Firestore, collectionData } from '@angular/fire/firestore';
+import { DocumentData, addDoc, collection } from 'firebase/firestore';
 import { Observable, from } from 'rxjs';
 import { AuthService } from '../user/auth.service';
 import { UserService } from '../user/user.service';
@@ -30,6 +30,9 @@ export class CampaignService{
         return from(promise);
     }
 
+    getAllCampaigns():Observable<(DocumentData | (DocumentData & {}))[]>{
+        return collectionData(this.campaignsCollection)
+    }
 }
 
 type Campaign = {
