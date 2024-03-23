@@ -24,7 +24,7 @@
       <button
         mat-raised-button
         id="signUpBtn"
-        routerLink="../{{ campaign.id }}/sign-up"
+        (click)="signUp()"
       >
         Sign up
       </button>
@@ -39,7 +39,7 @@
       <button
         mat-raised-button
         id="deleteBtn"
-        routerLink="../{{ campaign.id }}/delete"
+        (click)="delete()"
       >
         Delete
       </button>

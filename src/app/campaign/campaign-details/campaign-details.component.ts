@@ -19,4 +19,11 @@ export class CampaignDetailsComponent implements OnInit{
     this.campaign$ = this.campaignService.getCampaignById(campaignId);
   }
 
+  signUp(){
+    //TODO: Sign up user for campaign;
+  }
+
+  delete(){
+    //TODO: Delete campaign;
+  }
 }
