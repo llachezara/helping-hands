@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -13,7 +13,7 @@ import { MatSidenav } from '@angular/material/sidenav';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit{
   private breakpointObserver = inject(BreakpointObserver);
   menuToggled = false;
 
@@ -29,9 +29,13 @@ export class NavigationComponent {
     );
 
   get loggedInUser(){
-    return this.auth.user$;
+    return this.auth.isLoggedIn;
   }
   constructor(private auth: AuthService, private router: Router){}
+
+  ngOnInit(): void {
+    console.log('In nav onInit')
+  }
 
   logout(){
     this.auth.logout().subscribe({

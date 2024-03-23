@@ -1,3 +1,5 @@
-<app-navigation/>
-<app-main/>
-<app-footer/>
+<ng-container *ngIf="!isAuthenticating">
+  <app-navigation />
+  <app-main />
+  <app-footer />
+</ng-container>

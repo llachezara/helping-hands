@@ -1,34 +1,31 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, OnDestroy} from '@angular/core';
 import {Auth, UserCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword, user} from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { Observable, from, map} from 'rxjs';
+import { Observable, Subscription, from, map} from 'rxjs';
 import { UserInterface } from '../types/User';
 
 @Injectable()
-export class AuthService {
-  constructor(private firebaseAuth: Auth, private router: Router) {}
-
+export class AuthService implements OnDestroy{
+  userSubscription: Subscription
   user$ = user(this.firebaseAuth).pipe(
     map((user)=>{
-      let newUser: UserInterface | null = user ? {email: user.email!} : user;
-      return newUser
+      let newUser: UserInterface | null = user ? {email: user.email!, uid: user.uid!} : user;
+      return newUser;
     })
   );
 
-  get currentUser(): string | null{
-    console.log(localStorage.getItem('user'));
-    
-    return localStorage.getItem('user');
-  }
+  currentUser: UserInterface | null | undefined;
 
   get isLoggedIn(){
     return !!this.currentUser;
   }
+
+  constructor(private firebaseAuth: Auth, private router: Router) {
+    this.userSubscription = this.user$.subscribe((user)=> {this.currentUser = user})
+  }
   
   login(email: string, password: string): Observable<void> {
-     const promise = signInWithEmailAndPassword(this.firebaseAuth, email, password).then((data)=>{
-      localStorage.setItem('user', JSON.stringify({email: data.user.email, uid: data.user.uid}));
-     });
+     const promise = signInWithEmailAndPassword(this.firebaseAuth, email, password).then((data)=>{console.log("Login", data)});
      
      return from(promise);
   }
@@ -41,8 +38,10 @@ export class AuthService {
 
   logout(): Observable<void> {
     const promise = this.firebaseAuth.signOut();
-    localStorage.removeItem('user');
     return from(promise);
   }
 
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
+  }
 }

@@ -1,4 +1,5 @@
 export type UserInterface = {
-    email: string
+    email: string,
+    uid: string
 }
   

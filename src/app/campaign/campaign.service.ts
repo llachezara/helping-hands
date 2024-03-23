@@ -13,7 +13,7 @@ export class CampaignService{
     
 
     createCampaign(data: object): Observable<void> {
-        const owner = JSON.parse(this.authService.currentUser!).uid;
+        const owner = this.authService.currentUser!.uid;
         let campaignId = '';
         console.log(owner, { 
             ...data,
