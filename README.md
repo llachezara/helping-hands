@@ -24,12 +24,12 @@ This will install all the required dependencies listed in the package.json file.
 After installing the dependencies, you can serve the application locally using Angular CLI's ng serve command. Run the following command:
 
 ```bash
-ng serve
+npx ng serve
 ```
 By default, the application will be served on http://localhost:4200/. You can specify a different port using the --port flag. For example:
 
 ```bash
-ng serve --port 3000
+npx ng serve --port 3000
 ```
 This will serve the application on http://localhost:3000/.
 
