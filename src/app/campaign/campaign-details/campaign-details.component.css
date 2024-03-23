@@ -1,0 +1,110 @@
+mat-card {
+    max-width: 60vw;
+    width: 60vw;
+    height: 92vh;
+    text-align: center;
+    font-family: Montserrat, sans-serif;
+    color: rgb(71, 81, 74);
+    /* background-image: linear-gradient(in oklch to right, #93A5CF, #E4EfE9); */
+    background: rgb(204,208,240);
+    /* background: linear-gradient(50deg, rgb(209, 212, 239) 0%, rgba(255,255,255,1) 100%), */
+    background: linear-gradient(217deg, #f4ede9f0, #cd4d4d00 70.71%),
+                linear-gradient(127deg, #eff5ebcc, #00ff0000 70.71%),
+                linear-gradient(336deg, #ceceebcc, #0000ff00 70.71%);
+    border: 0.1px solid rgb(210, 210, 210);
+    box-shadow:
+        inset #88b97a 0 0 0 1px,
+        inset #b5e3af 0 0 0 10px,
+        inset #cbf2ca 0 0 0 11px,
+        inset #cbd9f2 0 0 0 16px,
+        inset #cbd7f6 0 0 0 17px,
+        inset #e1e8f7 0 0 0 21px,
+        inset #e8faf9 0 0 0 22px;
+
+    text-shadow: 3px 3px 1px #bfecf7;
+}
+
+mat-card-content{
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    justify-content: right;
+    height: 80%;
+}
+mat-card-actions{
+    display: flex;
+    justify-content: center;
+}
+mat-card-actions button{
+    font-size: 15px;
+    width: 15%;
+    height: 50%;
+    margin: 2vw;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 50%;
+    max-width: 50%;
+    margin: 20px;
+}
+
+.general{
+    border-bottom: 1px solid grey;
+}
+.general *{
+    margin-left: 10px;
+    padding-bottom: 10px;
+}
+
+.personal{
+    margin-top:20px;
+}
+
+.personal *{
+    margin: 10px 5px 5px 10px;
+}
+
+h2{
+    font-size: 22px;
+    text-align: center;
+}
+
+.label{
+    margin: 10px 2px 10px 10px;
+    font-size: 19px;
+}
+
+.text{
+    font-size: 16px;
+}
+
+img{
+    display: inline;
+    width: 50%;
+    height: 80%;
+    max-width: 50%;
+    max-height: 80%;
+    margin: 20px;
+    border-radius: 2px;
+    opacity: 0.9;
+    box-shadow: 10px 10px 5px rgb(107, 113, 117);
+}
+
+#signUpBtn{
+    background-color: #2bc848 ;
+    color: white;
+}
+
+#editBtn{
+    background-color: #4a89c1;
+    color: white;
+}
+
+#deleteBtn{
+    background-color: #f04744;
+    color:white
+}
+/* #0fb62e */

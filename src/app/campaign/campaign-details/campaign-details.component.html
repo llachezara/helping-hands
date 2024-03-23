@@ -1,1 +1,28 @@
-<p>campaign-details works!</p>
+<mat-card>
+  <mat-card-content>
+    <div class="info">
+      <div class="general">
+        <h2>Title</h2>
+        <p class="label">Description: </p>
+        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur dicta deleniti labore ipsam explicabo ab sapiente nemo. Veritatis possimus suscipit aspernatur soluta deserunt facere vero neque nam voluptate, perferendis distinctio!</p>
+        <p class="label">Start Date:</p>
+        <p class="label">End Date:</p>
+      </div>
+      <div class="personal">
+        <h2>Owner details</h2>
+        <p class="label"> Phone number:</p>
+        <p class="label">Region: </p>
+      </div>
+    </div>
+    <img
+      src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
+    />
+  </mat-card-content>
+  <mat-card-actions>
+    <!-- User can Sign up for campaign if they haven't and if they are not owner -->
+    <button mat-raised-button id="signUpBtn">Sign up</button>
+    <!-- User can Edit and Delete campaign if they are owner -->
+    <button mat-raised-button id="editBtn">Edit</button>
+    <button mat-raised-button id="deleteBtn">Delete</button>
+  </mat-card-actions>
+</mat-card>
