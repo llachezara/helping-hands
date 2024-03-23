@@ -3,12 +3,16 @@ import { RouterModule, Routes } from "@angular/router";
 import { CreateCampaignComponent } from "./create-campaign/create-campaign.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { CampaignDetailsComponent } from "./campaign-details/campaign-details.component";
+import { CampaignEditComponent } from "./campaign-edit/campaign-edit.component";
 
 const campaignRoutes: Routes = [
     {path:'campaigns', children:[
         {path:'', component: DashboardComponent},
         {path:'create', component: CreateCampaignComponent},
-        {path:':id', component: CampaignDetailsComponent}
+        {path:':id', children:[
+            {path:'', component: CampaignDetailsComponent},
+            {path:'edit', component: CampaignEditComponent}
+        ]}
     ]}
 ];
 

@@ -19,13 +19,15 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { CampaignService } from "./campaign.service";
 import { CampaignItemComponent } from './campaign-item/campaign-item.component';
 import { CampaignDetailsComponent } from './campaign-details/campaign-details.component';
+import { CampaignEditComponent } from './campaign-edit/campaign-edit.component';
 
 @NgModule({
     declarations: [
     CreateCampaignComponent,
     DashboardComponent,
     CampaignItemComponent,
-    CampaignDetailsComponent
+    CampaignDetailsComponent,
+    CampaignEditComponent
   ],
     imports:[
         CommonModule,
