@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CollectionReference, Firestore, collectionData } from '@angular/fire/firestore';
-import { DocumentData, DocumentReference, addDoc, collection, updateDoc } from 'firebase/firestore';
-import { Observable, from } from 'rxjs';
+import { DocumentData, DocumentReference, addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { Observable, from, map } from 'rxjs';
 import { AuthService } from '../user/auth.service';
 import { UserService } from '../user/user.service';
+import { CampaignDoc } from '../types/Campaign';
 
 @Injectable()
 export class CampaignService{
@@ -19,8 +20,7 @@ export class CampaignService{
             owner
          });
 
-        
-        const promise = addDoc(this.campaignsCollection, <Campaign>{ 
+        const promise = addDoc(this.campaignsCollection, <CampaignRawDoc>{ 
            ...data,
            owner
         })
@@ -40,12 +40,21 @@ export class CampaignService{
         return collectionData(this.campaignsCollection)
     }
 
+    getCampaignById(id: string | null): Observable<CampaignDoc>{
+        const docRef = doc(this.campaignsCollection, `${id}`)
+
+        return from(getDoc(docRef)).pipe(map(doc => {
+            console.log(doc.data());
+            return doc.data() as CampaignDoc;
+          }));
+    }
+
     updateCampaign(docRef: DocumentReference, data: object){
         return updateDoc(docRef, data);
     }
 }
 
-type Campaign = {
+type CampaignRawDoc = {
     title:string,
     imageUrl: string,
     description:string,

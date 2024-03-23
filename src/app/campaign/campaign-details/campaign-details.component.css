@@ -24,6 +24,11 @@ mat-card {
     text-shadow: 3px 3px 1px #bfecf7;
 }
 
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
 mat-card-content{
     display: flex;
     flex-direction: row;
@@ -73,11 +78,12 @@ h2{
 }
 
 .label{
-    margin: 10px 2px 10px 10px;
+    margin: 10px 2px 0 10px;
     font-size: 19px;
 }
 
 .text{
+    padding-left: 10px;
     font-size: 16px;
 }
 
