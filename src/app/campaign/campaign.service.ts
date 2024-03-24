@@ -52,6 +52,10 @@ export class CampaignService{
     updateCampaign(docRef: DocumentReference, data: object){
         return updateDoc(docRef, data);
     }
+
+    deleteCampaign(){
+        //TODO: Delete campaign from Firestore
+    }
 }
 
 type CampaignRawDoc = {

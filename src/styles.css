@@ -2,3 +2,16 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.delete-dialog  .mdc-dialog__surface{
+    background: linear-gradient(0, rgb(247, 236, 235) 0%, rgba(255,255,255,1) 100%);
+}
+
+.delete-dialog  div{
+    justify-content: end;
+}
+
+.delete-dialog #delete{
+    color: black;
+    background-color: #ff5858;
+}

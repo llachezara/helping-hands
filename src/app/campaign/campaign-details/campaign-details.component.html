@@ -21,11 +21,7 @@
     </mat-card-content>
     <mat-card-actions>
       <!-- User can Sign up for campaign if they haven't and if they are not owner -->
-      <button
-        mat-raised-button
-        id="signUpBtn"
-        (click)="signUp()"
-      >
+      <button mat-raised-button id="signUpBtn" (click)="signUp()">
         Sign up
       </button>
       <!-- User can Edit and Delete campaign if they are owner -->
@@ -36,13 +32,19 @@
       >
         Edit
       </button>
-      <button
-        mat-raised-button
-        id="deleteBtn"
-        (click)="delete()"
-      >
+      <button mat-raised-button id="deleteBtn" (click)="openDialog()">
         Delete
       </button>
     </mat-card-actions>
   </div>
 </mat-card>
+
+<ng-template #deleteDialog>
+  <h1 mat-dialog-title>
+    Are you sure you want to delete the current campaign?
+  </h1>
+    <div mat-dialog-actions class="actions">
+      <button id="delete" mat-raised-button (click)="delete()">Delete Campaign</button>
+      <button mat-raised-button [mat-dialog-close] cdkFocusInitial>Cancel</button>
+    </div>
+</ng-template>

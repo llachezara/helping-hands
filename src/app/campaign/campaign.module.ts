@@ -15,6 +15,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { TextFieldModule } from "@angular/cdk/text-field";
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { CampaignService } from "./campaign.service";
 import { CampaignItemComponent } from './campaign-item/campaign-item.component';
@@ -42,7 +43,8 @@ import { CampaignEditComponent } from './campaign-edit/campaign-edit.component';
         MatFormFieldModule,
         TextFieldModule,
         MatPaginatorModule,
-        MatGridListModule
+        MatGridListModule,
+        MatDialogModule
     ],
     providers:[CampaignService]
 })
