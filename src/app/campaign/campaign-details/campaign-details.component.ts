@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CampaignService } from '../campaign.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable} from 'rxjs';
 import { CampaignDoc } from 'src/app/types/Campaign';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -15,12 +15,13 @@ export class CampaignDetailsComponent implements OnInit{
   dialogRef: MatDialogRef<any, any> | undefined
   
   campaign$: Observable<CampaignDoc> | undefined = undefined;
-  constructor(private route: ActivatedRoute, private campaignService: CampaignService, private dialog: MatDialog){}
+  campaignId: string | null | undefined
+  constructor(private route: ActivatedRoute, private campaignService: CampaignService, private dialog: MatDialog, private router: Router){}
 
   ngOnInit(): void {
-    const campaignId = this.route.snapshot.paramMap.get('id');
+    this.campaignId = this.route.snapshot.paramMap.get('id');
 
-    this.campaign$ = this.campaignService.getCampaignById(campaignId);
+    this.campaign$ = this.campaignService.getCampaignById(this.campaignId);
   }
 
   signUp(){
@@ -34,8 +35,17 @@ export class CampaignDetailsComponent implements OnInit{
   }
 
   delete(){
-    this.campaignService.deleteCampaign();
-    this.dialogRef?.close()
+    
+    this.campaignService.deleteCampaign(this.campaignId!).subscribe({
+      next:()=>{
+        
+      console.log('Deleted campaign document');
+        this.dialogRef?.close();
+        this.router.navigate(['/campaigns']);
+      },
+      error:(error)=> console.log('Error from delete campaign')
+    });
+
     console.log('User clicked Delete');
   }
 }

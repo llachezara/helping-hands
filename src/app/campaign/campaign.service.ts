@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CollectionReference, Firestore, collectionData } from '@angular/fire/firestore';
-import { DocumentData, DocumentReference, addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { DocumentData, DocumentReference, addDoc, collection, deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { Observable, from, map } from 'rxjs';
 import { AuthService } from '../user/auth.service';
 import { UserService } from '../user/user.service';
@@ -53,8 +53,16 @@ export class CampaignService{
         return updateDoc(docRef, data);
     }
 
-    deleteCampaign(){
-        //TODO: Delete campaign from Firestore
+    deleteCampaign(campaignId: string | null){
+        const campaignDocRef = doc(this.campaignsCollection, `${campaignId}`);
+
+        const promise = this.userService.removeCampaignFromUser(campaignDocRef)
+            .then(()=>{
+                console.log('Deleted campaignId from user campaigns array')
+                return deleteDoc(campaignDocRef);
+            })
+
+        return from(promise);
     }
 }
 

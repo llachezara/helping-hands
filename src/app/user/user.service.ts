@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { CollectionReference, Firestore } from '@angular/fire/firestore';
 import { UserCredential } from 'firebase/auth';
-import { DocumentReference, addDoc, arrayUnion, collection, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
+import { DocumentReference, addDoc, arrayRemove, arrayUnion, collection, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import { Observable, from } from 'rxjs';
+import { CampaignDoc } from '../types/Campaign';
 
 @Injectable()
 export class UserService{
@@ -29,6 +30,24 @@ export class UserService{
              update(doc.ref).then(()=>{})
         })
 
+    }
+
+    async removeCampaignFromUser( campaignDocRef: DocumentReference){
+        
+        const campaignDoc = (await getDoc(campaignDocRef)).data() as CampaignDoc;
+        const {id, owner} = campaignDoc;
+
+        const q = query(this.usersCollection, where("uid", "==", owner));
+
+        const userDocs = await getDocs(q);
+        const update = (userDocRef: DocumentReference) => updateDoc(userDocRef, {
+            campaigns: arrayRemove(id)
+        });
+
+        userDocs.forEach((doc)=>{
+             update(doc.ref).then(()=>{})
+        })
+    
     }
 }
 
