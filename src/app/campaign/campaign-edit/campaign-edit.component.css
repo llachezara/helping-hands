@@ -1,0 +1,88 @@
+mat-card {
+    width: 60vw;
+    height: 92vh;
+    margin: 1em auto;
+    text-align: center;
+    border-radius: 20px;
+    color: rgb(94, 103, 97);
+  }
+  
+  mat-card-header {
+    padding-bottom: 20px;
+    display: flex;
+    background-color: #f5eab8;
+    /* background-color: #F2ECE4 ; */
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  h3 {
+    margin: 0;
+    text-align: left;
+  }
+  
+  .general {
+    display: flex;
+    width: 50%;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: 20px;
+  }
+  
+  .longer-input {
+    max-width: 25vw;
+    width: 25vw;
+    height: 10vh;
+  }
+  
+  .bigger-textarea {
+    max-width: 25vw;
+    width: 25vw;
+    height: 20vh;
+  }
+  
+  .date {
+    max-width: 15vw;
+    height: 11vh;
+    width: 15vw;
+    margin-bottom: 10px;
+  }
+  
+  /*Personal div*/
+  .wrapper-personal {
+    width: 50%;
+    margin: 20px;
+  }
+  
+  .personal {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+  
+  .personal mat-form-select {
+    max-width: 25vw;
+  }
+  
+  .actions {
+    display: flex;
+    margin: 0 20px 50px 50px;
+    justify-content: right;
+  }
+  
+  .actions button {
+    width: 100px;
+    height: 40px;
+    background-color: #1891a9;
+  }
+  
