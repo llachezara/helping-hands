@@ -4,7 +4,7 @@ import { DocumentData, DocumentReference, addDoc, collection, deleteDoc, doc, ge
 import { Observable, from, map } from 'rxjs';
 import { AuthService } from '../user/auth.service';
 import { UserService } from '../user/user.service';
-import { CampaignDoc } from '../types/Campaign';
+import { CampaignDoc, CampaignEditPartial } from '../types/Campaign';
 
 @Injectable()
 export class CampaignService{
@@ -49,7 +49,12 @@ export class CampaignService{
           }));
     }
 
-    updateCampaign(docRef: DocumentReference, data: object){
+    updateCampaignById(id:string | null, data: CampaignEditPartial):Observable<void>{
+        const docRef = doc(this.campaignsCollection, `${id}`)
+        return from(this.updateCampaign(docRef, data))
+    }
+
+    private updateCampaign(docRef: DocumentReference, data: object){
         return updateDoc(docRef, data);
     }
 

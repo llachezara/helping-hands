@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CampaignDoc } from 'src/app/types/Campaign';
+import { CampaignDoc, CampaignEditPartial } from 'src/app/types/Campaign';
 import { CampaignService } from '../campaign.service';
 import { Timestamp } from 'firebase/firestore';
 
@@ -24,7 +24,7 @@ export class CampaignEditComponent implements OnInit{
     phoneNumber: ['', Validators.required],
     region: ['', Validators.required],
   });
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private campaignService: CampaignService) {}
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private campaignService: CampaignService, private router: Router) {}
 
   ngOnInit(): void {
     this.campaignId = this.route.snapshot.paramMap.get('id');
@@ -52,5 +52,14 @@ export class CampaignEditComponent implements OnInit{
 
   onSubmit() {
     console.log(this.editForm.value);
+    //Validate form
+    const newData = this.editForm.value;
+    this.campaignService.updateCampaignById(this.campaignId!, newData as CampaignEditPartial).subscribe({
+      next: ()=> {
+        console.log(`Updated campaign ${this.campaignId}`);
+        this.router.navigate([`/campaigns/${this.campaignId}`])
+      },
+      error: (error)=> console.log(error)
+    })
   }
 }

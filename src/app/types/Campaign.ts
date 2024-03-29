@@ -10,4 +10,14 @@ export type CampaignDoc = {
     owner:string,
     startDate: Timestamp,
     endDate: Timestamp,
-  }
+}
+
+export type CampaignEditPartial = { 
+    title: string; 
+    imageUrl: string; 
+    description: string; 
+    startDate: Date; 
+    endDate: Date; 
+    phoneNumber: string ; 
+    region: string; 
+}
