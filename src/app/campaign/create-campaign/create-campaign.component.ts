@@ -15,10 +15,10 @@ export class CreateCampaignComponent {
     title:['', Validators.required],
     imageUrl: ['', Validators.required],
     description:['', Validators.required],
-    startDate:[null, Validators.required],
-    endDate:[null, Validators.required],
+    startDate:[ new Date, Validators.required],
+    endDate:[new Date, Validators.required],
     phoneNumber:['', Validators.required],
-    region:[null, Validators.required]
+    region:['', Validators.required]
   })
   constructor(private fb: FormBuilder, private campaignService: CampaignService, private router: Router){}
 
