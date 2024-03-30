@@ -19,22 +19,35 @@
       </div>
       <img src="{{ campaign.imageUrl }}" />
     </mat-card-content>
-    <mat-card-actions>
+
+    <mat-card-actions *ngIf="currentUser">
       <!-- User can Sign up for campaign if they haven't and if they are not owner -->
-      <button mat-raised-button id="signUpBtn" (click)="openDialog(signUpDialog, 'signUp-dialog')">
-        Sign up
-      </button>
-      <!-- User can Edit and Delete campaign if they are owner -->
+      <ng-container *ngIf="currentUser.uid !== (campaign$ | async)?.owner" >
       <button
         mat-raised-button
-        id="editBtn"
-        routerLink="../{{ campaign.id }}/edit"
+        id="signUpBtn"
+        (click)="openDialog(signUpDialog, 'signUp-dialog')"
       >
-        Edit
+        Sign up
       </button>
-      <button mat-raised-button id="deleteBtn" (click)="openDialog(deleteDialog, 'delete-dialog')">
-        Delete
-      </button>
+    </ng-container>
+      <!-- User can Edit and Delete campaign if they are owner -->
+      <ng-container *ngIf="currentUser.uid == (campaign$ | async)?.owner">
+        <button
+          mat-raised-button
+          id="editBtn"
+          routerLink="../{{ campaign.id }}/edit"
+        >
+          Edit
+        </button>
+        <button
+          mat-raised-button
+          id="deleteBtn"
+          (click)="openDialog(deleteDialog, 'delete-dialog')"
+        >
+          Delete
+        </button>
+      </ng-container>
     </mat-card-actions>
   </div>
 </mat-card>
@@ -43,18 +56,20 @@
   <h1 mat-dialog-title>
     Are you sure you want to delete the current campaign?
   </h1>
-    <div mat-dialog-actions class="actions">
-      <button id="delete" mat-raised-button (click)="delete()">Delete Campaign</button>
-      <button mat-raised-button [mat-dialog-close] cdkFocusInitial>Cancel</button>
-    </div>
+  <div mat-dialog-actions class="actions">
+    <button id="delete" mat-raised-button (click)="delete()">
+      Delete Campaign
+    </button>
+    <button mat-raised-button [mat-dialog-close] cdkFocusInitial>Cancel</button>
+  </div>
 </ng-template>
 
 <ng-template #signUpDialog>
   <h1 mat-dialog-title>
     Are you sure you want to sign up for the current campaign?
   </h1>
-    <div mat-dialog-actions class="actions">
-      <button id="signUp" mat-raised-button (click)="signUp()">Sign up</button>
-      <button mat-raised-button [mat-dialog-close] cdkFocusInitial>Cancel</button>
-    </div>
+  <div mat-dialog-actions class="actions">
+    <button id="signUp" mat-raised-button (click)="signUp()">Sign up</button>
+    <button mat-raised-button [mat-dialog-close] cdkFocusInitial>Cancel</button>
+  </div>
 </ng-template>

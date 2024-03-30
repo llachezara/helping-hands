@@ -11,6 +11,9 @@ export class CampaignService{
     constructor(private firestore: Firestore, private authService: AuthService, private userService: UserService){}
     campaignsCollection: CollectionReference = collection(this.firestore, 'campaigns');
     
+    currentUser(){
+        return this.authService.currentUser 
+    }
 
     createCampaign(data: object): Observable<void> {
         const owner = this.authService.currentUser!.uid;

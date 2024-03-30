@@ -23,6 +23,9 @@ export class CampaignDetailsComponent implements OnInit{
     this.campaign$ = this.campaignService.getCampaignById(this.campaignId);
   }
 
+  get currentUser(){
+    return this.campaignService.currentUser();
+  }
   signUp(){
     this.campaignService.signUpUserForCampaign(this.campaignId!).subscribe({
       next:()=>{
