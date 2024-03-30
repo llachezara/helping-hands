@@ -17,17 +17,6 @@ export class RegisterComponent {
  
   constructor(private authService: AuthService, private router: Router, private userService: UserService){}
 
-  createUser(data: UserCredential){
-    this.userService.createUserProfile(data).subscribe({
-      next:(data)=>{
-        console.log(data);
-      },
-      error:(error)=>{
-        console.log(error);
-        this.errorMessage = error.message;
-      }
-  })
-  }
   onSubmit() {
      //TODO: Validate form
      if (!this.form) {
@@ -38,9 +27,8 @@ export class RegisterComponent {
      const {password, rePassword} = passGroup;
 
     this.authService.register(email, password).subscribe({
-        next: (data)=> {
-          console.log('Registered', data);
-          this.createUser(data);
+        next: ()=> {
+          console.log('Registered');
           this.errorMessage = null;
           this.router.navigate(['/home']);
         },

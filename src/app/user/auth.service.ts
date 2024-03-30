@@ -3,6 +3,7 @@ import {Auth, UserCredential, createUserWithEmailAndPassword, signInWithEmailAnd
 import { Router } from '@angular/router';
 import { Observable, Subscription, from, map} from 'rxjs';
 import { UserInterface } from '../types/User';
+import { UserService } from './user.service';
 
 @Injectable()
 export class AuthService implements OnDestroy{
@@ -20,7 +21,7 @@ export class AuthService implements OnDestroy{
     return !!this.currentUser;
   }
 
-  constructor(private firebaseAuth: Auth, private router: Router) {
+  constructor(private firebaseAuth: Auth, private router: Router, private userService: UserService) {
     this.userSubscription = this.user$.subscribe((user)=> {this.currentUser = user})
   }
   
@@ -30,8 +31,11 @@ export class AuthService implements OnDestroy{
      return from(promise);
   }
 
-  register(email: string, password: string): Observable<UserCredential> {
-    const promise = createUserWithEmailAndPassword(this.firebaseAuth, email, password);
+  register(email: string, password: string): Observable<void> {
+    const promise = createUserWithEmailAndPassword(this.firebaseAuth, email, password)
+      .then((data)=>{
+        return this.userService.createUserProfile(data)
+      })
       
     return from(promise);
   }

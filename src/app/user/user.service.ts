@@ -10,13 +10,16 @@ export class UserService{
     constructor(private firestore: Firestore){}
     usersCollection: CollectionReference = collection(this.firestore, 'users');
 
-    createUserProfile(data: UserCredential): Observable<DocumentReference> {
-        const promise = addDoc(this.usersCollection, <UserProfile>{ 
+    async createUserProfile(data: UserCredential): Promise<void> {
+        const userDocRef = await addDoc(this.usersCollection, <UserProfile>{ 
             uid: data.user.uid,
             email: data.user.email,
             campaigns: []
         })
-        return from(promise)
+
+        return updateDoc(userDocRef, {
+            id: userDocRef.id
+        })
     }
 
     async updateCampaignsForUser(campaignId: string, uid: string){
