@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CollectionReference, Firestore, collectionData } from '@angular/fire/firestore';
-import { DocumentData, DocumentReference, addDoc, collection, deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { DocumentData, DocumentReference, addDoc, arrayUnion, collection, deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { Observable, from, map } from 'rxjs';
 import { AuthService } from '../user/auth.service';
 import { UserService } from '../user/user.service';
@@ -68,6 +68,20 @@ export class CampaignService{
             })
 
         return from(promise);
+    }
+
+    signUpUserForCampaign(campaignId: string): Observable<void>{
+        const userUid =  this.authService.currentUser!.uid;
+        const campaignDocRef = doc(this.campaignsCollection, `${campaignId}`);
+        
+        const promise = this.userService.addCampaignToUserSignedCampaigns(campaignId, userUid)
+        .then((userId) =>{
+            return updateDoc(campaignDocRef, {
+                signedUpUsers: arrayUnion(userId)
+            })
+        })
+
+        return from(promise)
     }
 }
 

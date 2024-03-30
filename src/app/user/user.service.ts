@@ -10,6 +10,22 @@ export class UserService{
     constructor(private firestore: Firestore){}
     usersCollection: CollectionReference = collection(this.firestore, 'users');
 
+
+    async getUserDoc(uid: string){
+        const q = query(this.usersCollection, where("uid", "==", uid));
+        const docs = await getDocs(q);
+        let userId = '';
+        console.log("The length is ", docs.size);
+        
+        docs.forEach(doc=>{
+            userId = doc.id
+        })
+
+        const userDocRef = doc(this.usersCollection, `${userId}`);
+
+        return userDocRef;
+    }
+
     async createUserProfile(data: UserCredential): Promise<void> {
         const userDocRef = await addDoc(this.usersCollection, <UserProfile>{ 
             uid: data.user.uid,
@@ -51,6 +67,14 @@ export class UserService{
              update(doc.ref).then(()=>{})
         })
     
+    }
+
+    async addCampaignToUserSignedCampaigns(campaignId: string, userUid: string){
+        const userDocRef = await this.getUserDoc(userUid);
+        await updateDoc(userDocRef, {
+            signedUpCampaigns: arrayUnion(campaignId)
+        })
+        return userDocRef.id
     }
 }
 

@@ -24,7 +24,14 @@ export class CampaignDetailsComponent implements OnInit{
   }
 
   signUp(){
-    //TODO: Sign up user for campaign;
+    this.campaignService.signUpUserForCampaign(this.campaignId!).subscribe({
+      next:()=>{
+        console.log('SigneUpUser');
+        this.dialogRef?.close();
+        this.router.navigate([`/campaigns/${this.campaignId}`])
+      },
+      error:(error)=>console.log(error)
+    })
   }
 
   openDialog(dialog: TemplateRef<MatDialog>, panelClass: string): void {
