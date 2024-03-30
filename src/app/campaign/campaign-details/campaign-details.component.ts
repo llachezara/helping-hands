@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { CampaignService } from '../campaign.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable} from 'rxjs';
@@ -11,7 +11,6 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./campaign-details.component.css']
 })
 export class CampaignDetailsComponent implements OnInit{
-  @ViewChild('deleteDialog') deleteDialog: TemplateRef<any> | undefined;
   dialogRef: MatDialogRef<any, any> | undefined
   
   campaign$: Observable<CampaignDoc> | undefined = undefined;
@@ -28,9 +27,9 @@ export class CampaignDetailsComponent implements OnInit{
     //TODO: Sign up user for campaign;
   }
 
-  openDialog(): void {
-    this.dialogRef = this.dialog.open(this.deleteDialog!,{
-      panelClass: 'delete-dialog'
+  openDialog(dialog: TemplateRef<MatDialog>, panelClass: string): void {
+    this.dialogRef = this.dialog.open(dialog,{
+      panelClass: panelClass
     });
   }
 
