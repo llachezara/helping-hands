@@ -17,7 +17,8 @@ export class CampaignService{
 
     isCampaignSignedByUser(campaignId: string){
         console.log('In campaignService', campaignId)
-        return this.userService.isUserSignedForCampaign(campaignId, this.authService.currentUser!.uid)
+        const currentUserUid = this.authService.currentUser ? this.authService.currentUser.uid : '' ;
+        return this.userService.isUserSignedForCampaign(campaignId, currentUserUid)
     }
 
     createCampaign(data: object): Observable<void> {
