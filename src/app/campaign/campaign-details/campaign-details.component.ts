@@ -1,7 +1,7 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { CampaignService } from '../campaign.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable} from 'rxjs';
+import { Observable, Subscription} from 'rxjs';
 import { CampaignDoc } from 'src/app/types/Campaign';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
@@ -10,8 +10,9 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
   templateUrl: './campaign-details.component.html',
   styleUrls: ['./campaign-details.component.css']
 })
-export class CampaignDetailsComponent implements OnInit{
+export class CampaignDetailsComponent implements OnInit, OnDestroy{
   dialogRef: MatDialogRef<any, any> | undefined
+  subscriptions: Subscription[] = [];
   
   campaign$: Observable<CampaignDoc> | undefined = undefined;
   campaignId: string | null | undefined;
@@ -34,6 +35,7 @@ export class CampaignDetailsComponent implements OnInit{
         error:(error)=>console.log(error)
     })
 
+   this.subscriptions.push(isUserSignedSubscription);
   }
 
   get currentUser(){
@@ -49,6 +51,8 @@ export class CampaignDetailsComponent implements OnInit{
       },
       error:(error)=>console.log(error)
     })
+
+    this.subscriptions.push(signUpSubscription);
   }
 
   openDialog(dialog: TemplateRef<MatDialog>, panelClass: string): void {
@@ -69,5 +73,10 @@ export class CampaignDetailsComponent implements OnInit{
     });
 
     console.log('User clicked Delete');
+    this.subscriptions.push(deleteSubscription);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription)=> subscription.unsubscribe())
   }
 }
