@@ -5,6 +5,7 @@ import { Observable, from, map } from 'rxjs';
 import { AuthService } from '../user/auth.service';
 import { UserService } from '../user/user.service';
 import { CampaignDoc, CampaignEditPartial } from '../types/Campaign';
+import { UserPopulatedDoc } from '../types/User';
 
 @Injectable()
 export class CampaignService{
@@ -14,8 +15,30 @@ export class CampaignService{
     currentUser(){
         return this.authService.currentUser 
     }
-    getUserWithPopulatedCampaigns(){
-        //TODO: Get user document and populate campaigns and signedUpCampaigns fieds 
+
+    getCurrentUserPopulatedWithCampaignsDoc(): Observable<UserPopulatedDoc>{
+        const currentUserUid = this.authService.currentUser!.uid;
+        return from(this.userService.getCurrentUserDoc(currentUserUid)
+            .then(async (userDoc) => {
+                const populatedCampaigns = await Promise.all(userDoc.campaigns.map(campaignId => {
+                    const campaignDocRef = doc(this.campaignsCollection, `${campaignId}`);
+                    return getDoc(campaignDocRef);
+                }))
+                const populatedSignedUpCampaigns = await Promise.all(userDoc.signedUpCampaigns.map(campaignId => {
+                    const campaignDocRef = doc(this.campaignsCollection, `${campaignId}`);
+                    return getDoc(campaignDocRef);
+                }))
+
+                return {
+                    ...userDoc, 
+                    campaigns: populatedCampaigns.map((campaign)=> campaign.data()),
+                    signedUpCampaigns: populatedSignedUpCampaigns.map((campaign)=> campaign.data())
+                }
+            })
+            .then(userPopulatedDoc => {
+                return userPopulatedDoc as UserPopulatedDoc
+            })
+        )
     }
 
     isCampaignSignedByUser(campaignId: string){
