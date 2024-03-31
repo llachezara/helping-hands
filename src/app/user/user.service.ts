@@ -4,14 +4,24 @@ import { UserCredential } from 'firebase/auth';
 import { DocumentReference, addDoc, arrayRemove, arrayUnion, collection, doc, getDoc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import { Observable, from } from 'rxjs';
 import { CampaignDoc } from '../types/Campaign';
+import { UserDoc } from '../types/User';
 
 @Injectable()
 export class UserService{
     constructor(private firestore: Firestore){}
     usersCollection: CollectionReference = collection(this.firestore, 'users');
 
+    async getCurrentUserDoc(uid: string): Promise<UserDoc>{
+        return this.getUserDocRef(uid)
+            .then(userDocRef=>{
+                return getDoc(userDocRef);
+            })
+            .then(userDoc=>{
+                return userDoc.data() as UserDoc
+            })
+    }
 
-    async getUserDoc(uid: string){
+    async getUserDocRef(uid: string){
         const q = query(this.usersCollection, where("uid", "==", uid));
         const docs = await getDocs(q);
         let userId = '';
@@ -70,7 +80,7 @@ export class UserService{
     }
 
     async addCampaignToUserSignedCampaigns(campaignId: string, userUid: string){
-        const userDocRef = await this.getUserDoc(userUid);
+        const userDocRef = await this.getUserDocRef(userUid);
         await updateDoc(userDocRef, {
             signedUpCampaigns: arrayUnion(campaignId)
         })

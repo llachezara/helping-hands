@@ -25,7 +25,7 @@ export class CampaignDetailsComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.campaignId = this.route.snapshot.paramMap.get('id');
-
+    //TODO: Check for invalid campaignId
     this.campaign$ = this.campaignService.getCampaignById(this.campaignId);
     const isUserSignedSubscription = this.campaignService.isCampaignSignedByUser(this.campaignId!).subscribe({
         next:(boolean)=>{

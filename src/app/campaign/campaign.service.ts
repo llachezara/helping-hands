@@ -14,6 +14,9 @@ export class CampaignService{
     currentUser(){
         return this.authService.currentUser 
     }
+    getUserWithPopulatedCampaigns(){
+        //TODO: Get user document and populate campaigns and signedUpCampaigns fieds 
+    }
 
     isCampaignSignedByUser(campaignId: string){
         console.log('In campaignService', campaignId)
