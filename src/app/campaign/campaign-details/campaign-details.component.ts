@@ -14,24 +14,28 @@ export class CampaignDetailsComponent implements OnInit{
   dialogRef: MatDialogRef<any, any> | undefined
   
   campaign$: Observable<CampaignDoc> | undefined = undefined;
-  campaignId: string | null | undefined
+  campaignId: string | null | undefined;
+  isUserSignedUp$: Observable<boolean> | undefined;
+
   constructor(private route: ActivatedRoute, private campaignService: CampaignService, private dialog: MatDialog, private router: Router){}
 
   ngOnInit(): void {
     this.campaignId = this.route.snapshot.paramMap.get('id');
 
     this.campaign$ = this.campaignService.getCampaignById(this.campaignId);
+    this.isUserSignedUp$ = this.campaignService.isCampaignSignedByUser(this.campaignId!)
   }
 
   get currentUser(){
     return this.campaignService.currentUser();
   }
+
   signUp(){
     this.campaignService.signUpUserForCampaign(this.campaignId!).subscribe({
       next:()=>{
         console.log('SigneUpUser');
         this.dialogRef?.close();
-        this.router.navigate([`/campaigns/${this.campaignId}`])
+        //TODO: Update the UI dynamically
       },
       error:(error)=>console.log(error)
     })

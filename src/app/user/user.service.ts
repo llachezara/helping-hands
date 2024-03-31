@@ -76,6 +76,14 @@ export class UserService{
         })
         return userDocRef.id
     }
+
+     isUserSignedForCampaign(campaignId: string, userUid: string){
+        const q = query(this.usersCollection, where('uid', '==', userUid), where('signedUpCampaigns', 'array-contains', campaignId))
+        console.log("In User service")
+        return from(getDocs(q).then((docs)=>{
+            return docs.size > 0
+        }))
+    }
 }
 
 type UserProfile = {
