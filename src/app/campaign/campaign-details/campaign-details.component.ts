@@ -35,7 +35,7 @@ export class CampaignDetailsComponent implements OnInit{
       next:()=>{
         console.log('SigneUpUser');
         this.dialogRef?.close();
-        //TODO: Update the UI dynamically
+        this.isUserSignedUp$ = this.campaignService.isCampaignSignedByUser(this.campaignId!)
       },
       error:(error)=>console.log(error)
     })
