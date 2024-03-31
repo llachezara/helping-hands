@@ -1,0 +1,138 @@
+#user {
+    width: 50vw;
+    background-color: #f8f8ed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    padding-bottom: 1em;
+    padding-left: 4em;
+    padding-right: 5em;
+}
+  
+.user-logo img{
+    width: 100%;
+    height: 100%;
+}
+.user-logo{
+    display: flex;
+    justify-content: center;
+    max-width: 22vw;
+    max-height: 47vh;
+    align-items: center;
+    padding: 10px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+.user-email{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #26394d;
+}
+
+#initials{
+    font-size: 6em;
+    position: absolute;
+    z-index: 1;
+    color:#26394d;
+    margin-top: -10px;
+    margin-left:-2px;
+    text-shadow: 3px 4px 8px #88cecd;
+}
+  
+.profile-campaigns {
+    width: 57.5vw;
+    display: flex;
+    background-color: #FFD275;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+.wrapper{
+    padding: 0 40px 20px 0;
+}
+
+.wrapper-1{
+    width: 60%;
+}
+
+.wrapper-2{
+    width: 40%;
+}
+
+.created-campaigns, .signed-campaigns{
+    background-color: transparent;
+    max-width: 40em;
+    max-height: 30em;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: justify;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  
+}
+  
+::-webkit-scrollbar-thumb {
+    background-color: #262322;
+    border-radius: 10px;
+}
+  
+::-webkit-scrollbar-thumb:hover {
+    background: #645f5e;
+}
+  
+.section-title{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow';
+    padding-top:2em;
+    padding-bottom: 1em;
+    text-align: center;
+    font-size: 25px;
+    margin: 0;
+}
+  
+.profile-campaigns .info {
+    border: 2px solid #3d266b;
+    padding: 20px;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    background-color: #f8f8ed;
+    border-radius: 30px;
+    color: black;
+    box-shadow: #26394d 0px 20px 30px -10px;
+}
+  
+.profile-campaigns .title {
+    font-size: 18px;
+    text-align: center;
+    height: 40%;
+    margin-bottom: 20px;
+    border-bottom: 1px solid black;
+}
+  
+.profile-campaigns .description {
+    text-align: left;
+}
+  
+.profile-campaigns .detailsBtn{
+    background-color: #262322;
+    color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}  

@@ -13,6 +13,7 @@ import { AuthService } from './auth.service';
 import { MatchPasswordsDirective } from './directives/match-password.directive';
 import { UserService } from './user.service';
 import { isGuestGuard } from './guards/is-guest.guard';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 
@@ -20,7 +21,8 @@ import { isGuestGuard } from './guards/is-guest.guard';
   declarations: [
     LoginComponent,
     RegisterComponent,
-    MatchPasswordsDirective
+    MatchPasswordsDirective,
+    UserProfileComponent
   ],
   imports: [
     CommonModule,
