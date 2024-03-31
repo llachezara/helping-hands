@@ -34,14 +34,16 @@ mat-card-content{
     flex-direction: row;
     text-align: left;
     justify-content: right;
-    height: 80%;
+    height: 70vh;
 }
+
 mat-card-actions{
     display: flex;
     justify-content: center;
+    
 }
 mat-card-actions button{
-    font-size: 15px;
+    font-size: 16px;
     width: 15%;
     height: 50%;
     margin: 2vw;
@@ -54,11 +56,9 @@ mat-card-actions button{
     width: 50%;
     max-width: 50%;
     margin: 20px;
+    padding: 15px;
 }
 
-.general{
-    border-bottom: 1px solid grey;
-}
 .general *{
     margin-left: 10px;
     padding-bottom: 10px;
@@ -66,6 +66,7 @@ mat-card-actions button{
 
 .personal{
     margin-top:20px;
+    border-top: 1px solid grey;
 }
 
 .personal *{
@@ -73,7 +74,7 @@ mat-card-actions button{
 }
 
 h2{
-    font-size: 22px;
+    font-size: 24px;
     text-align: center;
 }
 
@@ -97,10 +98,10 @@ h3{
 
 img{
     display: inline;
-    width: 50%;
-    height: 80%;
-    max-width: 50%;
-    max-height: 80%;
+    width: 30vw;
+    height: 50vh;
+    max-width: 30vw;
+    max-height: 50vh;
     margin: 20px;
     border-radius: 2px;
     opacity: 0.9;

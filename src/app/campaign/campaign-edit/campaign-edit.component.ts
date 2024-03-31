@@ -33,6 +33,8 @@ export class CampaignEditComponent implements OnInit{
       next:(doc)=>{
 
         const startDate = doc.startDate.toDate();
+        console.log(doc.startDate, startDate);
+        
         const endDate = doc.endDate.toDate();
         
         this.editForm.setValue({

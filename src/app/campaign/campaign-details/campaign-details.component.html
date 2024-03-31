@@ -7,9 +7,9 @@
           <p class="label">Description:</p>
           <p class="text">{{ campaign.description }}</p>
           <p class="label">Start Date:</p>
-          <p class="text">{{ campaign.startDate.toDate() }}</p>
+          <p class="text">{{ campaign.startDate.toDate().toDateString()}}</p>
           <p class="label">End Date:</p>
-          <p class="text">{{ campaign.endDate.toDate() }}</p>
+          <p class="text">{{ campaign.endDate.toDate().toDateString() }}</p>
         </div>
         <div class="personal" *ngIf="isUserSignedUp$ | async">
           <h2>Owner details</h2>
@@ -22,7 +22,7 @@
 
     <mat-card-actions *ngIf="currentUser">
       <!-- User can Sign up for campaign if they haven't and if they are not owner -->
-      <ng-container *ngIf="currentUser.uid !== (campaign$ | async)?.owner && !(isUserSignedUp$ | async)" >
+      <ng-container *ngIf="currentUser.uid !== campaign.owner && !(isUserSignedUp$ | async)" >
       <button
         mat-raised-button
         id="signUpBtn"
@@ -32,11 +32,11 @@
       </button>
     </ng-container>
     
-    <ng-container *ngIf="currentUser.uid !== (campaign$ | async)?.owner && (isUserSignedUp$ | async)" >
+    <ng-container *ngIf="currentUser.uid !== campaign.owner && (isUserSignedUp$ | async)" >
       <h3>You have signed up for this campaign. :)</h3>
     </ng-container>
       <!-- User can Edit and Delete campaign if they are owner -->
-      <ng-container *ngIf="currentUser.uid == (campaign$ | async)?.owner">
+      <ng-container *ngIf="currentUser.uid == campaign.owner">
         <button
           mat-raised-button
           id="editBtn"
