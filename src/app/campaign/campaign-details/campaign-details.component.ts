@@ -15,7 +15,10 @@ export class CampaignDetailsComponent implements OnInit{
   
   campaign$: Observable<CampaignDoc> | undefined = undefined;
   campaignId: string | null | undefined;
-  isUserSignedUp$: Observable<boolean> | undefined;
+
+  isUserSignUpResultReady = false;
+  isUserSignedUp: boolean | undefined;
+ 
 
   constructor(private route: ActivatedRoute, private campaignService: CampaignService, private dialog: MatDialog, private router: Router){}
 
@@ -23,7 +26,14 @@ export class CampaignDetailsComponent implements OnInit{
     this.campaignId = this.route.snapshot.paramMap.get('id');
 
     this.campaign$ = this.campaignService.getCampaignById(this.campaignId);
-    this.isUserSignedUp$ = this.campaignService.isCampaignSignedByUser(this.campaignId!)
+    const isUserSignedSubscription = this.campaignService.isCampaignSignedByUser(this.campaignId!).subscribe({
+        next:(boolean)=>{
+          this.isUserSignUpResultReady = true;
+          this.isUserSignedUp = boolean;
+        },
+        error:(error)=>console.log(error)
+    })
+
   }
 
   get currentUser(){
@@ -31,11 +41,11 @@ export class CampaignDetailsComponent implements OnInit{
   }
 
   signUp(){
-    this.campaignService.signUpUserForCampaign(this.campaignId!).subscribe({
+    const signUpSubscription = this.campaignService.signUpUserForCampaign(this.campaignId!).subscribe({
       next:()=>{
         console.log('SigneUpUser');
         this.dialogRef?.close();
-        this.isUserSignedUp$ = this.campaignService.isCampaignSignedByUser(this.campaignId!)
+        this.isUserSignedUp = true;
       },
       error:(error)=>console.log(error)
     })
@@ -48,8 +58,7 @@ export class CampaignDetailsComponent implements OnInit{
   }
 
   delete(){
-    
-    this.campaignService.deleteCampaign(this.campaignId!).subscribe({
+    const deleteSubscription = this.campaignService.deleteCampaign(this.campaignId!).subscribe({
       next:()=>{
         
       console.log('Deleted campaign document');
