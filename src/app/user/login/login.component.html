@@ -1,13 +1,7 @@
-<div *ngIf="errorMessage">
-  {{errorMessage}}
-</div> 
 <mat-card>
   <mat-card-content>
     <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
       <h2>Login</h2>
-      <mat-error *ngIf="">
-        The username and password were not recognized
-      </mat-error>
       <mat-form-field>
         <mat-label>Enter email</mat-label>
         <input
@@ -18,7 +12,7 @@
          appIsEmail
          #email="ngModel"
          />
-        <mat-error *ngIf="email.errors?.['required'] && email.pristine">Email address is required</mat-error>
+        <mat-error *ngIf="email.errors?.['required'] && email.touched">Email address is required</mat-error>
         <mat-error *ngIf="email.errors?.['emailNotValid'] && email.dirty">Please provide a valid email address</mat-error>
       </mat-form-field>
       <mat-form-field>
@@ -32,9 +26,12 @@
           ngModel
           #password="ngModel"
         />
-        <mat-error *ngIf="password.errors?.['required'] && password.pristine"> Password is required </mat-error>
+        <mat-error *ngIf="password.errors?.['required'] && password.touched"> Password is required </mat-error>
         <mat-error *ngIf="password.errors?.['passNotValid'] && password.dirty">Please provide a valid password</mat-error>
       </mat-form-field>
+      <div class="error" *ngIf="errorMessage">
+        <span>{{errorMessage}}</span>
+      </div>
       <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid">Login</button>
       <!--  -->
     </form>

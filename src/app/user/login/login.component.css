@@ -19,5 +19,32 @@ button{
     margin-top:5px;
 }
 
+.error{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    overflow: visible;
+    top: 0;
+    right:-30rem;
+    width: 15rem;
+    height: 3rem;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    padding: 8px;
+    color: #D8000C;
+    background-color: #ffbdbd;
+    background-image: url('https://i.imgur.com/GnyDvKN.png');
+    background-repeat: no-repeat;
+	background-position: 8px center;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px 2px #777272;
+}
+
+.error span{
+    margin-left:35px;
+    text-shadow: 2px 1px 1px #dcd5d5 ;
+    font-weight: 600;
+}
 
 
