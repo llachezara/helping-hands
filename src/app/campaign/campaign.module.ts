@@ -21,6 +21,8 @@ import { CampaignService } from "./campaign.service";
 import { CampaignItemComponent } from './campaign-item/campaign-item.component';
 import { CampaignDetailsComponent } from './campaign-details/campaign-details.component';
 import { CampaignEditComponent } from './campaign-edit/campaign-edit.component';
+import { campaignExistsGuard } from "./guards/campaign-exists.guard";
+
 
 @NgModule({
     declarations: [
@@ -46,7 +48,7 @@ import { CampaignEditComponent } from './campaign-edit/campaign-edit.component';
         MatGridListModule,
         MatDialogModule
     ],
-    providers:[CampaignService]
+    providers:[CampaignService, campaignExistsGuard]
 })
 export class CampaignModule{
 

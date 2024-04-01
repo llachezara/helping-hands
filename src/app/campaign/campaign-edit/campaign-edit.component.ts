@@ -29,7 +29,7 @@ export class CampaignEditComponent implements OnInit{
   ngOnInit(): void {
     this.campaignId = this.route.snapshot.paramMap.get('id');
 
-    this.campaignService.getCampaignById(this.campaignId).subscribe({
+    this.campaignService.getCampaignById(this.campaignId!).subscribe({
       next:(doc)=>{
 
         const startDate = doc.startDate.toDate();

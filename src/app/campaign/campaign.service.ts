@@ -41,10 +41,9 @@ export class CampaignService{
         )
     }
 
-    isCampaignSignedByUser(campaignId: string){
-        console.log('In campaignService', campaignId)
-        const currentUserUid = this.authService.currentUser ? this.authService.currentUser.uid : '' ;
-        return this.userService.isUserSignedForCampaign(campaignId, currentUserUid)
+    checkCampaignExistence(id: string): Observable<boolean>{
+        const docRef = doc(this.campaignsCollection, `${id}`);
+        return from(getDoc(docRef).then(docSnapshot => docSnapshot.exists()));
     }
 
     createCampaign(data: object): Observable<void> {
@@ -75,7 +74,7 @@ export class CampaignService{
         return collectionData(this.campaignsCollection)
     }
 
-    getCampaignById(id: string | null): Observable<CampaignDoc>{
+    getCampaignById(id: string): Observable<CampaignDoc>{
         const docRef = doc(this.campaignsCollection, `${id}`)
 
         return from(getDoc(docRef)).pipe(map(doc => {
@@ -84,7 +83,7 @@ export class CampaignService{
           }));
     }
 
-    updateCampaignById(id:string | null, data: CampaignEditPartial):Observable<void>{
+    updateCampaignById(id:string, data: CampaignEditPartial):Observable<void>{
         const docRef = doc(this.campaignsCollection, `${id}`)
         return from(this.updateCampaign(docRef, data))
     }
@@ -117,6 +116,12 @@ export class CampaignService{
         })
 
         return from(promise)
+    }
+
+    isCampaignSignedByUser(campaignId: string){
+        console.log('In campaignService', campaignId)
+        const currentUserUid = this.authService.currentUser ? this.authService.currentUser.uid : '' ;
+        return this.userService.isUserSignedForCampaign(campaignId, currentUserUid)
     }
 }
 

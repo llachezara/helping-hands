@@ -5,12 +5,13 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { CampaignDetailsComponent } from "./campaign-details/campaign-details.component";
 import { CampaignEditComponent } from "./campaign-edit/campaign-edit.component";
 import { isAuthGuard } from "../user/guards/is-auth.guard";
+import { campaignExistsGuard } from "./guards/campaign-exists.guard";
 
 const campaignRoutes: Routes = [
     {path:'campaigns', children:[
         {path:'', component: DashboardComponent},
         {path:'create', component: CreateCampaignComponent},
-        {path:':id', children:[
+        {path:':id', canActivate:[campaignExistsGuard], children:[
             {path:'', component: CampaignDetailsComponent},
             {path:'edit',canActivate:[isAuthGuard] ,component: CampaignEditComponent}
         ]}
