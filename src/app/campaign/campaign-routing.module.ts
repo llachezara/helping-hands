@@ -10,10 +10,10 @@ import { campaignExistsGuard } from "./guards/campaign-exists.guard";
 const campaignRoutes: Routes = [
     {path:'campaigns', children:[
         {path:'', component: DashboardComponent},
-        {path:'create', component: CreateCampaignComponent},
+        {path:'create', canActivate:[isAuthGuard], component: CreateCampaignComponent},
         {path:':id', canActivate:[campaignExistsGuard], children:[
             {path:'', component: CampaignDetailsComponent},
-            {path:'edit',canActivate:[isAuthGuard] ,component: CampaignEditComponent}
+            {path:'edit', canActivate:[isAuthGuard] , component: CampaignEditComponent}
         ]}
     ]}
 ];

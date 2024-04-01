@@ -12,12 +12,12 @@ export class CampaignService{
     constructor(private firestore: Firestore, private authService: AuthService, private userService: UserService){}
     campaignsCollection: CollectionReference = collection(this.firestore, 'campaigns');
     
-    currentUser(){
-        return this.authService.currentUser 
+    get currentUser(){
+        return this.authService.currentUser;
     }
 
     getCurrentUserPopulatedWithCampaignsDoc(): Observable<UserPopulatedDoc>{
-        const currentUserUid = this.authService.currentUser!.uid;
+        const currentUserUid = this.currentUser!.uid;
         return from(this.userService.getCurrentUserDoc(currentUserUid)
             .then(async (userDoc) => {
                 const populatedCampaigns = await Promise.all(userDoc.campaigns.map(campaignId => {
@@ -46,8 +46,15 @@ export class CampaignService{
         return from(getDoc(docRef).then(docSnapshot => docSnapshot.exists()));
     }
 
+    checkIfCurrentUserIsCampaignOwner(campaignId: string){
+        const userUid = this.currentUser!.uid;
+        return from(this.getCampaignById(campaignId).pipe(map((campaignDoc)=>{
+            return campaignDoc.owner == userUid;
+        })))
+    }
+
     createCampaign(data: object): Observable<void> {
-        const owner = this.authService.currentUser!.uid;
+        const owner = this.currentUser!.uid;
         let campaignId = '';
         console.log(owner, { 
             ...data,
@@ -105,7 +112,7 @@ export class CampaignService{
     }
 
     signUpUserForCampaign(campaignId: string): Observable<void>{
-        const userUid =  this.authService.currentUser!.uid;
+        const userUid =  this.currentUser!.uid;
         const campaignDocRef = doc(this.campaignsCollection, `${campaignId}`);
         
         const promise = this.userService.addCampaignToUserSignedCampaigns(campaignId, userUid)
@@ -120,7 +127,7 @@ export class CampaignService{
 
     isCampaignSignedByUser(campaignId: string){
         console.log('In campaignService', campaignId)
-        const currentUserUid = this.authService.currentUser ? this.authService.currentUser.uid : '' ;
+        const currentUserUid = this.currentUser ? this.currentUser.uid : '' ;
         return this.userService.isUserSignedForCampaign(campaignId, currentUserUid)
     }
 }
