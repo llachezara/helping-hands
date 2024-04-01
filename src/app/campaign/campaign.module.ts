@@ -22,6 +22,7 @@ import { CampaignItemComponent } from './campaign-item/campaign-item.component';
 import { CampaignDetailsComponent } from './campaign-details/campaign-details.component';
 import { CampaignEditComponent } from './campaign-edit/campaign-edit.component';
 import { campaignExistsGuard } from "./guards/campaign-exists.guard";
+import { isCampaignOwnerGuard } from "./guards/is-campaign-owner.guard";
 
 
 @NgModule({
@@ -48,7 +49,7 @@ import { campaignExistsGuard } from "./guards/campaign-exists.guard";
         MatGridListModule,
         MatDialogModule
     ],
-    providers:[CampaignService, campaignExistsGuard]
+    providers:[CampaignService, campaignExistsGuard, isCampaignOwnerGuard]
 })
 export class CampaignModule{
 
