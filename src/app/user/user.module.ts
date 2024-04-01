@@ -16,6 +16,8 @@ import { MatchPasswordsDirective } from './directives/match-password.directive';
 import { UserService } from './user.service';
 import { isGuestGuard } from './guards/is-guest.guard';
 import { isAuthGuard } from './guards/is-auth.guard';
+import { IsEmailDirective } from './directives/is-email.directive';
+import { IsPasswordDirective } from './directives/is-password.directive';
 
 
 
@@ -24,7 +26,9 @@ import { isAuthGuard } from './guards/is-auth.guard';
     LoginComponent,
     RegisterComponent,
     MatchPasswordsDirective,
-    UserProfileComponent
+    UserProfileComponent,
+    IsEmailDirective,
+    IsPasswordDirective
   ],
   imports: [
     CommonModule,

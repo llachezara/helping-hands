@@ -15,9 +15,11 @@
          name="email" 
          required 
          ngModel
+         appIsEmail
          #email="ngModel"
          />
-        <mat-error *ngIf="email.invalid "> Please provide a valid email address </mat-error>
+        <mat-error *ngIf="email.errors?.['required'] && email.pristine">Email address is required</mat-error>
+        <mat-error *ngIf="email.errors?.['emailNotValid'] && email.dirty">Please provide a valid email address</mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Enter password</mat-label>
@@ -26,10 +28,12 @@
           type="password"
           name="password"
           required
+          appIsPassword
           ngModel
           #password="ngModel"
         />
-        <mat-error *ngIf="password.invalid "> Please provide a valid password </mat-error>
+        <mat-error *ngIf="password.errors?.['required'] && password.pristine"> Password is required </mat-error>
+        <mat-error *ngIf="password.errors?.['passNotValid'] && password.dirty">Please provide a valid password</mat-error>
       </mat-form-field>
       <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid">Login</button>
       <!--  -->

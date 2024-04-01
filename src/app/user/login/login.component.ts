@@ -15,7 +15,6 @@ export class LoginComponent {
  constructor(private auth: AuthService, private router: Router){}
 
  onSubmit(){
-    //TODO: Validate form
     if (!this.form) {
       return
     }
