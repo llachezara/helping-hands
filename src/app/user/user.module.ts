@@ -8,12 +8,14 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserRoutingModule } from './user-routing.module';
 import { AuthService } from './auth.service';
 import { MatchPasswordsDirective } from './directives/match-password.directive';
+
 import { UserService } from './user.service';
 import { isGuestGuard } from './guards/is-guest.guard';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { isAuthGuard } from './guards/is-auth.guard';
 
 
 
@@ -33,6 +35,6 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     MatInputModule,
     MatFormFieldModule
   ],
-  providers:[AuthService, UserService, isGuestGuard]
+  providers:[AuthService, UserService, isGuestGuard, isAuthGuard]
 })
 export class UserModule { }

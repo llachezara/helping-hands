@@ -2,15 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { isGuestGuard } from './guards/is-guest.guard';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { isGuestGuard } from './guards/is-guest.guard';
+import { isAuthGuard } from './guards/is-auth.guard';
 
 const routes: Routes = [
   { path: 'user', 
     children: [
         {path:'login', canActivate:[isGuestGuard], component: LoginComponent},
         {path:'register', canActivate:[isGuestGuard], component: RegisterComponent},
-        {path:'profile', component: UserProfileComponent}
+        {path:'profile', canActivate:[isAuthGuard], component: UserProfileComponent}
     ]}
 ];
 

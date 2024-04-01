@@ -4,6 +4,7 @@ import { CreateCampaignComponent } from "./create-campaign/create-campaign.compo
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { CampaignDetailsComponent } from "./campaign-details/campaign-details.component";
 import { CampaignEditComponent } from "./campaign-edit/campaign-edit.component";
+import { isAuthGuard } from "../user/guards/is-auth.guard";
 
 const campaignRoutes: Routes = [
     {path:'campaigns', children:[
@@ -11,7 +12,7 @@ const campaignRoutes: Routes = [
         {path:'create', component: CreateCampaignComponent},
         {path:':id', children:[
             {path:'', component: CampaignDetailsComponent},
-            {path:'edit', component: CampaignEditComponent}
+            {path:'edit',canActivate:[isAuthGuard] ,component: CampaignEditComponent}
         ]}
     ]}
 ];
