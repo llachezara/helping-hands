@@ -1,6 +1,3 @@
-<div *ngIf="errorMessage">
-  {{errorMessage}}
-</div> 
 <mat-card class="outer">
   <mat-card-content>
     <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
@@ -9,8 +6,11 @@
       <div class="inner">
       <mat-form-field>
         <mat-label>Enter email</mat-label>
-        <input matInput name="email" required ngModel #email="ngModel" />
-        <mat-error *ngIf="email.invalid">
+        <input matInput name="email" required ngModel appIsEmail #email="ngModel" />
+        <mat-error *ngIf="email.errors?.['required'] && email.touched">
+          Email address is required
+        </mat-error>
+        <mat-error *ngIf="email.errors?.['emailNotValid'] && email.dirty">
           Please provide a valid email address
         </mat-error>
       </mat-form-field>
@@ -22,11 +22,15 @@
             matInput
             type="password"
             name="password"
+            appIsPassword
             required
             ngModel
             #password="ngModel"
           />
-          <mat-error *ngIf="password.invalid">
+          <mat-error *ngIf="password.errors?.['required'] && password.touched">
+            Password is required
+          </mat-error>
+          <mat-error *ngIf="password.invalid || password.errors?.['passNotValid'] && password.dirty">
             Please provide a valid password
           </mat-error>
         </mat-form-field>
@@ -40,14 +44,17 @@
             ngModel
             #rePassword="ngModel"
           />
-          <mat-error *ngIf="password.invalid">
+          <mat-error *ngIf="rePassword.errors?.['required'] && rePassword.touched">
             Repassword is required
           </mat-error>
         </mat-form-field>
       </div>
-
-      <div class="error" *ngIf="password.invalid && password.touched && rePassword.touched || passGroup.errors?.['mismatch']">
-        Repassword must match password 
+      
+      <div class="error" *ngIf="rePassword.touched && passGroup.errors?.['mismatch'] && !errorMessage">
+        <span>Repassword must match password</span>
+      </div>
+      <div class="error" *ngIf="errorMessage">
+        <span>{{errorMessage}}</span>
       </div>
     </div>
       <button
