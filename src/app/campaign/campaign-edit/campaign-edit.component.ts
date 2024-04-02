@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CampaignDoc, CampaignEditPartial } from 'src/app/types/Campaign';
 import { CampaignService } from '../campaign.service';
 import { Timestamp } from 'firebase/firestore';
@@ -18,7 +18,8 @@ import { MatDatepickerInputEvent } from '@angular/material/datepicker';
   templateUrl: './campaign-edit.component.html',
   styleUrls: ['./campaign-edit.component.css']
 })
-export class CampaignEditComponent implements OnInit{
+export class CampaignEditComponent implements OnInit, OnDestroy{
+  subscriptions: Subscription[] = [];
   campaignHasEnded = false;
   campaignId: string | null | undefined;
 
@@ -43,7 +44,7 @@ export class CampaignEditComponent implements OnInit{
   ngOnInit(): void {
     this.campaignId = this.route.snapshot.paramMap.get('id');
 
-    this.campaignService.getCampaignById(this.campaignId!).subscribe({
+    const getCampaignSubscription = this.campaignService.getCampaignById(this.campaignId!).subscribe({
       next:(doc)=>{
 
         const startDate = doc.startDate.toDate();
@@ -64,6 +65,8 @@ export class CampaignEditComponent implements OnInit{
       },
       error:(error)=>console.log(error)
     });
+
+    this.subscriptions.push(getCampaignSubscription);
   }
 
   onSubmit():void {
@@ -73,13 +76,15 @@ export class CampaignEditComponent implements OnInit{
     }
     
     const newData = this.editForm.value;
-    this.campaignService.updateCampaignById(this.campaignId!, newData as CampaignEditPartial).subscribe({
+    const updateCampaignSubscription = this.campaignService.updateCampaignById(this.campaignId!, newData as CampaignEditPartial).subscribe({
       next: ()=> {
         console.log(`Updated campaign ${this.campaignId}`);
         this.router.navigate([`/campaigns/${this.campaignId}`])
       },
       error: (error)=> console.log(error)
     })
+
+    this.subscriptions.push(updateCampaignSubscription);
   }
 
   setDates(startDate: Date, endDate: Date){
@@ -118,5 +123,9 @@ export class CampaignEditComponent implements OnInit{
     this.maxEndDate = new Date(this.minEndDate.getFullYear(), this.minEndDate.getMonth(), this.minEndDate.getDate() + 30);
 
     this.editForm.controls.endDate.setValue(this.minEndDate);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe())
   }
 }

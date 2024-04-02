@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CampaignService } from '../campaign.service';
 import { Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { ValidateDescription } from '../validators/description.validator';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { ValidatePhoneNumber } from '../validators/phone-number.validator';
 import { regions } from 'src/app/shared/regions';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -16,9 +17,11 @@ import { regions } from 'src/app/shared/regions';
   templateUrl: './create-campaign.component.html',
   styleUrls: ['./create-campaign.component.css']
 })
-export class CreateCampaignComponent {
+export class CreateCampaignComponent implements OnDestroy{
+  subscriptions: Subscription[] = [];
   matcher = new CustomErrorStateMatcher();
   regions: String[] = regions;
+  
   minStartDate: Date;
   minEndDate: Date;
   maxEndDate: Date;
@@ -46,13 +49,15 @@ export class CreateCampaignComponent {
   onSubmit():void{
     console.log(this.createForm.value)
 
-    this.campaignService.createCampaign(this.createForm.value).subscribe({
+    const createSubscription = this.campaignService.createCampaign(this.createForm.value).subscribe({
       next:()=>{
         console.log("Created campaign");
         this.router.navigate(['/campaigns']);
       },
       error:(error)=> console.log('Error on create campaign', error)
     });
+
+    this.subscriptions.push(createSubscription);
   }
 
   startDateEvent(event: MatDatepickerInputEvent<Date>) {
@@ -65,5 +70,9 @@ export class CreateCampaignComponent {
 
       this.createForm.controls.endDate.setValue(this.minEndDate)
    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe())
   }
 }
