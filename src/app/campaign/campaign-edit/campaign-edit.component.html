@@ -247,7 +247,6 @@
             EDIT
           </button>
         </div>
-        {{ this.editForm.controls.startDate.errors | json }}
         <div class="expired" *ngIf="campaignHasEnded">
           *The current campaign has ended. You can create a new one
           <a routerLink="../../create">here</a>.

@@ -88,3 +88,12 @@ h3 {
 #region{
     margin-top: 10px;
 }
+
+#instructions{
+    font-size: 18px;
+    font-style: italic;
+}
+
+#instructions span{
+    font-weight: 800;
+}
