@@ -82,8 +82,15 @@ h3{
     padding:20px;
     border-radius: 10px;
     font-size: 18px;
-    background-color: #b4e2a9;
     box-shadow: 5px 5px 5px 2px rgb(107, 113, 117);
+}
+
+#signedUp{
+    background-color: #b4e2a9;
+}
+
+#ended{
+    background-color: #f4f4c4;
 }
 
 .label{

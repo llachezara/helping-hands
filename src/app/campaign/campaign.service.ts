@@ -53,6 +53,18 @@ export class CampaignService{
         })))
     }
 
+    checkIfCampaignHasExpired(campaign: CampaignDoc): boolean{
+        
+        if (!campaign) {
+            return false
+        }
+        const currentDate = new Date();
+        const startDate = campaign.startDate.toDate();
+        const endDate = campaign.endDate.toDate();
+
+        return currentDate.getTime() > startDate.getTime() && currentDate.getTime() > endDate.getTime()
+    }
+
     createCampaign(data: object): Observable<void> {
         const owner = this.currentUser!.uid;
         let campaignId = '';
@@ -90,7 +102,7 @@ export class CampaignService{
           }));
     }
 
-    updateCampaignById(id:string, data: CampaignEditPartial):Observable<void>{
+    updateCampaignById(id:string, data: CampaignEditPartial | {hasEnded: boolean}):Observable<void>{
         const docRef = doc(this.campaignsCollection, `${id}`)
         return from(this.updateCampaign(docRef, data))
     }

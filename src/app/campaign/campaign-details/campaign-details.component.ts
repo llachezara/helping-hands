@@ -21,11 +21,28 @@ export class CampaignDetailsComponent implements OnInit, OnDestroy{
   isUserSignedUp: boolean | undefined;
  
 
-  constructor(private route: ActivatedRoute, private campaignService: CampaignService, private dialog: MatDialog, private router: Router){}
+  constructor(private route: ActivatedRoute, private campaignService: CampaignService, private dialog: MatDialog, private router: Router){
+    this.campaignId = this.route.snapshot.paramMap.get('id');
+    
+    this.campaign$ = this.campaignService.getCampaignById(this.campaignId!);
+  }
 
   ngOnInit(): void {
-    this.campaignId = this.route.snapshot.paramMap.get('id');
-    this.campaign$ = this.campaignService.getCampaignById(this.campaignId!);
+    const campaignSubscription = this.campaign$!.subscribe({
+      next:(campaignDoc)=>{
+        
+        if (this.campaignService.checkIfCampaignHasExpired(campaignDoc)) {
+         const updateSubscription = this.campaignService.updateCampaignById(this.campaignId!, { hasEnded: true}).subscribe({
+          next:()=>{
+            console.log('Updated with hasEnded')
+          }, 
+          error: (error)=>console.log(error)
+         })
+         this.subscriptions.push(updateSubscription);
+        }
+      },
+      error:(error)=>console.log(error)
+  })
 
     const isUserSignedSubscription = this.campaignService.isCampaignSignedByUser(this.campaignId!).subscribe({
         next:(boolean)=>{
@@ -35,7 +52,7 @@ export class CampaignDetailsComponent implements OnInit, OnDestroy{
         error:(error)=> console.log(error)
     })
 
-   this.subscriptions.push(isUserSignedSubscription);
+   this.subscriptions.push(campaignSubscription,isUserSignedSubscription);
   }
 
   get currentUser(){

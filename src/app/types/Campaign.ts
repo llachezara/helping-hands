@@ -10,6 +10,7 @@ export type CampaignDoc = {
     owner:string,
     startDate: Timestamp,
     endDate: Timestamp,
+    hasEnded?: boolean
 }
 
 export type CampaignEditPartial = { 
@@ -20,4 +21,5 @@ export type CampaignEditPartial = {
     endDate: Date; 
     phoneNumber: string ; 
     region: string; 
+    hasEnded?: boolean
 }
