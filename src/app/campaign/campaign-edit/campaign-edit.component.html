@@ -1,6 +1,3 @@
-<!-- <div *ngIf="errorMessage">
-    {{ errorMessage }}
-  </div> -->
 <mat-card>
   <mat-card-header>
     <mat-card-title>Edit Campaign</mat-card-title>
@@ -10,17 +7,84 @@
       <div class="general">
         <h3>Title:</h3>
         <mat-form-field class="longer-input">
-          <input matInput formControlName="title" />
+          <input
+            matInput
+            [errorStateMatcher]="matcher"
+            formControlName="title"
+          />
+          <mat-error
+            *ngIf="
+              this.editForm.controls.title.hasError('required') &&
+              this.editForm.controls.title.touched
+            "
+          >
+            Title is required
+          </mat-error>
+          <mat-error
+            *ngIf="
+              this.editForm.controls.title.hasError('invalidTitle') &&
+              this.editForm.controls.title.dirty &&
+              !this.editForm.controls.title.hasError('required')
+            "
+          >
+            Title must start with a capital letter
+          </mat-error>
+          <mat-error
+            *ngIf="
+              !this.editForm.controls.title.hasError('invalidTitle') &&
+              this.editForm.controls.title.hasError('minlength') &&
+              this.editForm.controls.title.dirty
+            "
+          >
+            Title must be at least
+            {{this.editForm.controls.title.errors?.['minlength']?.['requiredLength']}}
+            characters
+          </mat-error>
+          <mat-error
+            *ngIf="
+              !this.editForm.controls.title.hasError('invalidTitle') &&
+              this.editForm.controls.title.hasError('maxlength') &&
+              this.editForm.controls.title.dirty
+            "
+          >
+            Title must be maximum
+            {{this.editForm.controls.title.errors?.['maxlength']?.['requiredLength']}}
+            characters
+          </mat-error>
         </mat-form-field>
 
         <h3>Image URL:</h3>
         <mat-form-field class="longer-input">
-          <input matInput formControlName="imageUrl" />
+          <input
+            matInput
+            [errorStateMatcher]="matcher"
+            formControlName="imageUrl"
+          />
+          <mat-error
+            mat-error
+            *ngIf="
+              this.editForm.controls.imageUrl.hasError('required') &&
+              this.editForm.controls.imageUrl.touched
+            "
+          >
+            Image URL is required
+          </mat-error>
+          <mat-error
+            mat-error
+            *ngIf="
+              this.editForm.controls.imageUrl.hasError('invalidImgUrl') &&
+              this.editForm.controls.imageUrl.dirty &&
+              !this.editForm.controls.imageUrl.hasError('required')
+            "
+          >
+            Image URL must be a valid image URL
+          </mat-error>
         </mat-form-field>
 
         <h3>Description:</h3>
         <mat-form-field class="bigger-textarea">
           <textarea
+            [errorStateMatcher]="matcher"
             cdkTextareaAutosize
             #autosize="cdkTextareaAutosize"
             cdkAutosizeMinRows="1"
@@ -30,14 +94,64 @@
             matInput
             formControlName="description"
           ></textarea>
+          <mat-error
+            *ngIf="
+              this.editForm.controls.description.hasError('required') &&
+              this.editForm.controls.description.touched
+            "
+          >
+            Description is required
+          </mat-error>
+          <mat-error
+            *ngIf="
+              this.editForm.controls.description.hasError(
+                'invalidDescription'
+              ) &&
+              this.editForm.controls.description.dirty &&
+              !this.editForm.controls.description.hasError('required')
+            "
+          >
+            Description must start with a capital letter
+          </mat-error>
+          <mat-error
+            *ngIf="
+              !this.editForm.controls.description.hasError(
+                'invalidDescription'
+              ) &&
+              this.editForm.controls.description.hasError('minlength') &&
+              this.editForm.controls.description.dirty
+            "
+          >
+            Description must be at least
+            {{this.editForm.controls.description.errors?.['minlength']?.['requiredLength']}}
+            characters
+          </mat-error>
+          <mat-error
+            *ngIf="
+              !this.editForm.controls.description.hasError(
+                'invalidDescription'
+              ) &&
+              this.editForm.controls.description.hasError('maxlength') &&
+              this.editForm.controls.description.dirty
+            "
+          >
+            Description must be maximum
+            {{this.editForm.controls.description.errors?.['maxlength']?.['requiredLength']}}
+            characters
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field class="date">
           <mat-label>Choose a start date</mat-label>
           <input
+            [errorStateMatcher]="matcher"
             matInput
             [matDatepicker]="pickerStart"
             formControlName="startDate"
+            [min]="minStartDate"
+            [max]="maxStartDate"
+            (dateInput)="startDateEvent($event)"
+            (dateChange)="startDateEvent($event)"
           />
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle
@@ -45,14 +159,30 @@
             [for]="pickerStart"
           ></mat-datepicker-toggle>
           <mat-datepicker #pickerStart></mat-datepicker>
+          <mat-error
+            *ngIf="this.editForm.controls.startDate.hasError('required')"
+          >
+            Start date is required</mat-error
+          >
+          <mat-error
+            *ngIf="
+              !this.editForm.controls.startDate.hasError('required') &&
+              this.editForm.controls.startDate.invalid
+            "
+          >
+            Start date must be a valid date</mat-error
+          >
         </mat-form-field>
 
         <mat-form-field class="date">
           <mat-label>Choose an end date</mat-label>
           <input
+            [errorStateMatcher]="matcher"
             matInput
             [matDatepicker]="pickerEnd"
             formControlName="endDate"
+            [min]="minEndDate"
+            [max]="maxEndDate"
           />
           <mat-hint>MM/DD/YYYY</mat-hint>
           <mat-datepicker-toggle
@@ -60,26 +190,67 @@
             [for]="pickerEnd"
           ></mat-datepicker-toggle>
           <mat-datepicker #pickerEnd></mat-datepicker>
+          <mat-error
+            *ngIf="this.editForm.controls.endDate.hasError('required')"
+          >
+            End date is required</mat-error
+          >
+          <mat-error
+            *ngIf="
+              !this.editForm.controls.endDate.hasError('required') &&
+              this.editForm.controls.endDate.invalid
+            "
+          >
+            End date must be a valid date</mat-error
+          >
         </mat-form-field>
       </div>
+
       <div class="wrapper-personal">
         <div class="personal">
           <h3>Contact telephone:</h3>
           <mat-form-field class="longer-input">
-            <input matInput formControlName="phoneNumber" />
+            <input
+              matInput
+              [errorStateMatcher]="matcher"
+              formControlName="phoneNumber"
+            />
+            <mat-error
+              *ngIf="!this.editForm.controls.phoneNumber.hasError('required') && this.editForm.controls.phoneNumber.errors?.['invalidNumber']"
+            >
+              Number must start with '08' and be
+              {{this.editForm.controls.phoneNumber.errors?.['invalidNumber'].requiredLength}}
+              digits long
+            </mat-error>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field class="region">
             <mat-label>Choose region</mat-label>
-            <mat-select formControlName="region">
+            <mat-select formControlName="region" [errorStateMatcher]="matcher">
               <mat-option *ngFor="let region of regions" [value]="region">
                 {{ region }}
               </mat-option>
             </mat-select>
+            <mat-error
+              *ngIf="this.editForm.controls.region.hasError('required')"
+            >
+              Region is required
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="actions">
-          <button mat-raised-button color="primary">EDIT</button>
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="!this.editForm.valid"
+          >
+            EDIT
+          </button>
+        </div>
+        {{ this.editForm.controls.startDate.errors | json }}
+        <div class="expired" *ngIf="campaignHasEnded">
+          *The current campaign has ended. You can create a new one
+          <a routerLink="../../create">here</a>.
         </div>
       </div>
     </form>
