@@ -29,7 +29,7 @@ export class CreateCampaignComponent implements OnDestroy{
   createForm = this.fb.group({
     title:['', [Validators.required, Validators.minLength(10), Validators.maxLength(64), ValidateTitle]],
     imageUrl: ['', [Validators.required, ValidateImageUrl]],
-    description:['', [Validators.required, Validators.minLength(20), Validators.maxLength(450), ValidateDescription]],
+    description:['', [Validators.required, Validators.minLength(20), Validators.maxLength(100), ValidateDescription]],
     startDate:[ new Date(), [Validators.required]],
     endDate:[new Date(), [Validators.required]],
     phoneNumber:['', [Validators.required, ValidatePhoneNumber]],
