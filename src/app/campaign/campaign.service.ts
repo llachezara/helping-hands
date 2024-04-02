@@ -20,11 +20,12 @@ export class CampaignService{
         const currentUserUid = this.currentUser!.uid;
         return from(this.userService.getCurrentUserDoc(currentUserUid)
             .then(async (userDoc) => {
+                
                 const populatedCampaigns = await Promise.all(userDoc.campaigns.map(campaignId => {
                     const campaignDocRef = doc(this.campaignsCollection, `${campaignId}`);
                     return getDoc(campaignDocRef);
                 }))
-                const populatedSignedUpCampaigns = await Promise.all(userDoc.signedUpCampaigns.map(campaignId => {
+                const populatedSignedUpCampaigns = await Promise.all(userDoc.signedUpCampaigns?.map(campaignId => {
                     const campaignDocRef = doc(this.campaignsCollection, `${campaignId}`);
                     return getDoc(campaignDocRef);
                 }))

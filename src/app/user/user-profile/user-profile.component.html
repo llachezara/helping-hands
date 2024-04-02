@@ -2,7 +2,7 @@
   <section id="user">
     <div class="user-info">
       <div class="user-logo">
-        <img src="../../../assets/profile-pic.png" />
+        <img alt="Profile-logo" src="../../../assets/profile-pic.png" />
         <p id="initials">{{ user.email.slice(0, 1).toUpperCase() }}</p>
       </div>
       <h1 class="user-email">Email: {{ user.email }}</h1>
@@ -11,10 +11,10 @@
   <section class="profile-campaigns">
     <div class="wrapper wrapper-1">
       <h2 class="section-title">Created Campaigns</h2>
-      <div class="created-campaigns">
+      <div class="created-campaigns" *ngIf="user.campaigns">
         <div class="info" *ngFor="let campaign of user.campaigns">
           <h2 class="title">{{ campaign.title }}</h2>
-          <h4 class="description">Description: {{ campaign.description }}</h4>
+          <h4 class="description">Description: {{ campaign?.description }}</h4>
           <button
             mat-raised-button
             routerLink="/campaigns/{{ campaign.id }}"
@@ -24,14 +24,15 @@
           </button>
         </div>
       </div>
+      <div *ngIf="user.campaigns.length == 0" class="no-campaigns">
+        You don't have created campaigns...
+      </div>
     </div>
 
-    <!-- If there are no created course
-              <h2 class="no-course-in-profile">You haven't created a course yet...</h2>
-          -->
+
     <div class="wrapper wrapper-2">
       <h2 class="section-title">Signed Campaigns</h2>
-      <div class="signed-campaigns">
+      <div class="signed-campaigns" *ngIf="user.signedUpCampaigns">
         <div
           class="info"
           *ngFor="let signedUpCampaign of user.signedUpCampaigns"
@@ -49,9 +50,10 @@
           </button>
         </div>
       </div>
-      <!-- If there are no followed course
-          <h2 class="no-course-in-profile">You haven't signed up for any course yet...</h2>
-          -->
+      <div *ngIf="user.signedUpCampaigns.length == 0" class="no-campaigns">
+        You haven't signed up for any campaigns...
+      </div>
     </div>
+
   </section>
 </ng-container>

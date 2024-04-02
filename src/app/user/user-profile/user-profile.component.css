@@ -19,6 +19,8 @@
     height: 100%;
 }
 .user-logo{
+    width: 22vw;
+    height: 47vh;
     display: flex;
     justify-content: center;
     max-width: 22vw;
@@ -29,6 +31,7 @@
     margin: 0 auto;
 }
 .user-email{
+    
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: #26394d;
 }
@@ -44,7 +47,8 @@
 }
   
 .profile-campaigns {
-    width: 57.5vw;
+    width: 59vw;
+    height: 80vh;
     display: flex;
     background-color: #FFD275;
     justify-content: center;
@@ -136,3 +140,20 @@
     display: inline-block;
     margin-top: 10px;
 }  
+
+.no-campaigns{
+    border: 2px solid #3d266b;
+    line-height: 1.4;
+    font-size: 18px;
+    padding: 20px;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20vw;
+    height: 5vh;
+    background-color: #f8f8ed;
+    border-radius: 30px;
+    color: black;
+    box-shadow: #26394d 0px 20px 30px -10px;
+}

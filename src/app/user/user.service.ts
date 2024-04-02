@@ -40,7 +40,8 @@ export class UserService{
         const userDocRef = await addDoc(this.usersCollection, <UserProfile>{ 
             uid: data.user.uid,
             email: data.user.email,
-            campaigns: []
+            campaigns: [],
+            signedUpCampaigns: []
         })
 
         return updateDoc(userDocRef, {
@@ -66,17 +67,26 @@ export class UserService{
         const campaignDoc = (await getDoc(campaignDocRef)).data() as CampaignDoc;
         const {id, owner} = campaignDoc;
 
-        const q = query(this.usersCollection, where("uid", "==", owner));
+        const queryForOwner = query(this.usersCollection, where("uid", "==", owner));
 
-        const userDocs = await getDocs(q);
-        const update = (userDocRef: DocumentReference) => updateDoc(userDocRef, {
+        const userDocs = await getDocs(queryForOwner);
+        const updateCampaigns = ( userDocRef: DocumentReference) => updateDoc(userDocRef, {
             campaigns: arrayRemove(id)
         });
 
         userDocs.forEach((doc)=>{
-             update(doc.ref).then(()=>{})
+            updateCampaigns(doc.ref).then(()=>{})
         })
     
+        const queryForSignedUsers = query(this.usersCollection, where("signedUpCampaigns", "array-contains", id));
+        const signedUpUsersDocs = await getDocs(queryForSignedUsers);
+        const updateSigneUpCampaigns = ( userDocRef: DocumentReference) => updateDoc(userDocRef, {
+            signedUpCampaigns: arrayRemove(id)
+        });
+
+        signedUpUsersDocs.forEach((doc)=>{
+            updateSigneUpCampaigns(doc.ref).then(()=>{})
+        })
     }
 
     async addCampaignToUserSignedCampaigns(campaignId: string, userUid: string){
