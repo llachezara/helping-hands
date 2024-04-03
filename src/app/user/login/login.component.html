@@ -27,7 +27,7 @@
           #password="ngModel"
         />
         <mat-error *ngIf="password.errors?.['required'] && password.touched"> Password is required </mat-error>
-        <mat-error *ngIf="password.errors?.['passNotValid'] && password.dirty">Please provide a valid password</mat-error>
+        <mat-error *ngIf="password.errors?.['passNotValid'] && password.dirty">Password must be at least 6 characters</mat-error>
       </mat-form-field>
       <div class="error" *ngIf="errorMessage">
         <span>{{errorMessage}}</span>

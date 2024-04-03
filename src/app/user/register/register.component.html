@@ -31,7 +31,7 @@
             Password is required
           </mat-error>
           <mat-error *ngIf="password.invalid || password.errors?.['passNotValid'] && password.dirty">
-            Please provide a valid password
+            Password must be at least 6 characters
           </mat-error>
         </mat-form-field>
         <mat-form-field>
