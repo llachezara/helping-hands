@@ -13,7 +13,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { TextFieldModule } from "@angular/cdk/text-field";
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDialogModule} from '@angular/material/dialog';
 
@@ -24,6 +24,7 @@ import { CampaignEditComponent } from './campaign-edit/campaign-edit.component';
 import { campaignExistsGuard } from "./guards/campaign-exists.guard";
 import { isCampaignOwnerGuard } from "./guards/is-campaign-owner.guard";
 import { SharedModule } from "../shared/shared.module";
+import { PaginatorIntl } from "./paginatorIntl";
 
 
 @NgModule({
@@ -51,7 +52,7 @@ import { SharedModule } from "../shared/shared.module";
         MatDialogModule,
         SharedModule
     ],
-    providers:[campaignExistsGuard, isCampaignOwnerGuard]
+    providers:[campaignExistsGuard, isCampaignOwnerGuard, { provide: MatPaginatorIntl, useClass: PaginatorIntl}]
 })
 export class CampaignModule{
 
