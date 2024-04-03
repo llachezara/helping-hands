@@ -77,8 +77,8 @@ export class CampaignEditComponent implements OnInit, OnDestroy{
       return
     }
     
-    const newData = this.editForm.value;
     this.editForm.value.imageUrl = this.editForm.value.imageUrl === '' ? this.defaultImageValue : this.editForm.value.imageUrl;
+    const newData = this.editForm.value;
 
     const updateCampaignSubscription = this.campaignService.updateCampaignById(this.campaignId!, newData as CampaignEditPartial).subscribe({
       next: ()=> {
