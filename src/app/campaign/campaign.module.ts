@@ -51,7 +51,7 @@ import { SharedModule } from "../shared/shared.module";
         MatDialogModule,
         SharedModule
     ],
-    providers:[CampaignService, campaignExistsGuard, isCampaignOwnerGuard]
+    providers:[campaignExistsGuard, isCampaignOwnerGuard]
 })
 export class CampaignModule{
 

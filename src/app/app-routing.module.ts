@@ -8,6 +8,8 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo:'/home'},
   { path: 'home', component: HomeComponent},
   { path: 'contacts', component: ContactsComponent},
+  { path: 'user', loadChildren: ()=> import('./user/user.module').then(m=> m.UserModule)},
+  { path: 'campaigns', loadChildren: ()=> import('./campaign/campaign.module').then(m=> m.CampaignModule)},
   { path: '**', redirectTo:'/404'},
   { path: '404', component: PageNotFoundComponent}
 ];

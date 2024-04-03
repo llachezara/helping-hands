@@ -6,7 +6,9 @@ import { Observable, from } from 'rxjs';
 import { CampaignDoc } from '../types/Campaign';
 import { UserDoc } from '../types/User';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class UserService{
     constructor(private firestore: Firestore){}
     usersCollection: CollectionReference = collection(this.firestore, 'users');

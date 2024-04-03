@@ -5,7 +5,9 @@ import { Observable, Subscription, from, map} from 'rxjs';
 import { UserInterface } from '../types/User';
 import { UserService } from './user.service';
 
-@Injectable()
+@Injectable({
+  providedIn:'root'
+})
 export class AuthService implements OnDestroy{
   userSubscription: Subscription
   user$ = user(this.firebaseAuth).pipe(

@@ -9,13 +9,11 @@ import { campaignExistsGuard } from "./guards/campaign-exists.guard";
 import { isCampaignOwnerGuard } from "./guards/is-campaign-owner.guard";
 
 const campaignRoutes: Routes = [
-    {path:'campaigns', children:[
-        {path:'', component: DashboardComponent},
-        {path:'create', canActivate:[isAuthGuard], component: CreateCampaignComponent},
-        {path:':id', canActivate:[campaignExistsGuard], children:[
-            {path:'', component: CampaignDetailsComponent},
-            {path:'edit', canActivate:[isAuthGuard, isCampaignOwnerGuard] , component: CampaignEditComponent}
-        ]}
+    {path:'', component: DashboardComponent},
+    {path:'create', canActivate:[isAuthGuard], component: CreateCampaignComponent},
+    {path:':id', canActivate:[campaignExistsGuard], children:[
+        {path:'', component: CampaignDetailsComponent},
+        {path:'edit', canActivate:[isAuthGuard, isCampaignOwnerGuard] , component: CampaignEditComponent}
     ]}
 ];
 

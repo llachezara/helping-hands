@@ -7,7 +7,9 @@ import { UserService } from '../user/user.service';
 import { CampaignDoc, CampaignEditPartial } from '../types/Campaign';
 import { UserPopulatedDoc } from '../types/User';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class CampaignService{
     constructor(private firestore: Firestore, private authService: AuthService, private userService: UserService){}
     campaignsCollection: CollectionReference = collection(this.firestore, 'campaigns');

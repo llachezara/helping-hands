@@ -13,7 +13,6 @@ import { UserRoutingModule } from './user-routing.module';
 import { AuthService } from './auth.service';
 import { MatchPasswordsDirective } from './directives/match-password.directive';
 
-import { UserService } from './user.service';
 import { isGuestGuard } from './guards/is-guest.guard';
 import { isAuthGuard } from './guards/is-auth.guard';
 import { IsEmailDirective } from './directives/is-email.directive';
@@ -41,6 +40,6 @@ import { SharedModule } from '../shared/shared.module';
     MatFormFieldModule,
     SharedModule
   ],
-  providers:[AuthService, UserService, isGuestGuard, isAuthGuard]
+  providers:[ isGuestGuard]
 })
 export class UserModule { }
