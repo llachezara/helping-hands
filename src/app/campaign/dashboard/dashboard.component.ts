@@ -23,7 +23,6 @@ export class DashboardComponent implements OnInit, OnDestroy{
     this.getCampaigns()
   }
 
-    const {pageSize, pageIndex} = event;
   getServerData(event: PageEvent){
       console.log("PAG EVENT", event);
       const {pageSize, pageIndex} = event;
