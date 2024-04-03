@@ -35,7 +35,8 @@ import { SharedModule } from '../shared/shared.module';
   exports:[
     NavigationComponent,
     MainComponent,
-    FooterComponent
+    FooterComponent,
+    MatIconModule
   ]
 })
 export class CoreModule { }
