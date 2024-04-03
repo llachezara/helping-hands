@@ -40,7 +40,7 @@ mat-card {
   .longer-input {
     max-width: 25vw;
     width: 25vw;
-    height: 10vh;
+    height: 11vh;
   }
   
   .bigger-textarea {
@@ -83,8 +83,17 @@ mat-card {
   .actions button {
     width: 100px;
     height: 40px;
-    background-color: #1891a9;
+
   }
+
+.valid{
+
+    background-color: #1891a9;
+}
+
+.invalid{
+    background-color: #aaa7a7;
+}
   
   #region{
     margin-top: 10px;

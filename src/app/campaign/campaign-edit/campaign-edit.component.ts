@@ -32,7 +32,7 @@ export class CampaignEditComponent implements OnInit, OnDestroy{
 
   editForm = this.fb.group({
     title: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(64), ValidateTitle]],
-    imageUrl: ['', [Validators.required, ValidateImageUrl]],
+    imageUrl: ['', [ ValidateImageUrl]],
     description: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(100), ValidateDescription]],
     startDate: [new Date, [Validators.required]],
     endDate: [new Date, [Validators.required]],
@@ -49,11 +49,12 @@ export class CampaignEditComponent implements OnInit, OnDestroy{
 
         const startDate = doc.startDate.toDate();
         const endDate = doc.endDate.toDate();
+        const imageUrl = doc.imageUrl === '../../../assets/default-image.png' ? '' : doc.imageUrl;
         console.log(startDate, endDate);
 
         this.editForm.setValue({
           title: doc.title,
-          imageUrl: doc.imageUrl,
+          imageUrl: imageUrl,
           description: doc.description,
           startDate: startDate,
           endDate: endDate,

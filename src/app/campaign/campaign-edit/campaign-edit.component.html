@@ -7,6 +7,7 @@
       <div class="general">
         <h3>Title:</h3>
         <mat-form-field class="longer-input">
+          <mat-label>Title</mat-label>
           <input
             matInput
             [errorStateMatcher]="matcher"
@@ -59,16 +60,8 @@
             matInput
             [errorStateMatcher]="matcher"
             formControlName="imageUrl"
+            placeholder="https://..."
           />
-          <mat-error
-            mat-error
-            *ngIf="
-              this.editForm.controls.imageUrl.hasError('required') &&
-              this.editForm.controls.imageUrl.touched
-            "
-          >
-            Image URL is required
-          </mat-error>
           <mat-error
             mat-error
             *ngIf="
@@ -83,6 +76,7 @@
 
         <h3>Description:</h3>
         <mat-form-field class="bigger-textarea">
+          <mat-label>Description</mat-label>
           <textarea
             [errorStateMatcher]="matcher"
             cdkTextareaAutosize
@@ -210,15 +204,19 @@
         <div class="personal">
           <h3>Contact telephone:</h3>
           <mat-form-field class="longer-input">
+            <mat-label>Telephone</mat-label>
             <input
               matInput
               [errorStateMatcher]="matcher"
               formControlName="phoneNumber"
             />
+            <mat-error *ngIf="this.editForm.controls.phoneNumber.hasError('required')">
+              Telephone is required
+            </mat-error>
             <mat-error
               *ngIf="!this.editForm.controls.phoneNumber.hasError('required') && this.editForm.controls.phoneNumber.errors?.['invalidNumber']"
             >
-              Number must start with '08' and be
+              Telephone must start with '08' and be
               {{this.editForm.controls.phoneNumber.errors?.['invalidNumber'].requiredLength}}
               digits long
             </mat-error>
@@ -242,6 +240,7 @@
           <button
             mat-raised-button
             color="primary"
+            [class]="!this.editForm.valid ? 'invalid' : 'valid'"
             [disabled]="!this.editForm.valid"
           >
             EDIT
