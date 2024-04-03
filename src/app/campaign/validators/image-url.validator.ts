@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-const regExp = /(http(s?):\/\/)([.\w|\s-%])+([.\w|\s-/%])*\.(?:jpg|gif|png)/;
+const regExp = /(http(s?):\/\/)([.\w|\s-%])+([.\w|\s-/%])*\.(?:jpg|gif|png|jpeg)/;
 
 export function ValidateImageUrl(control: AbstractControl): ValidationErrors | null {
   

@@ -14,7 +14,7 @@
       <div class="created-campaigns" *ngIf="user.campaigns">
         <div class="info" *ngFor="let campaign of user.campaigns">
           <h2 class="title">{{ campaign.title }}</h2>
-          <h4 class="description">Description: {{ campaign?.description }}</h4>
+          <h4 class="description">Description: {{ campaign.description | shorten : 27}}</h4>
           <button
             mat-raised-button
             routerLink="/campaigns/{{ campaign.id }}"
@@ -39,7 +39,7 @@
         >
           <h2 class="title">{{ signedUpCampaign.title }}</h2>
           <h4 class="description">
-            Description: {{ signedUpCampaign.description }}
+            Description: {{ signedUpCampaign.description | shorten : 20}}
           </h4>
           <button
             mat-raised-button

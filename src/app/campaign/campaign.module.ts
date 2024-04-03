@@ -23,6 +23,7 @@ import { CampaignDetailsComponent } from './campaign-details/campaign-details.co
 import { CampaignEditComponent } from './campaign-edit/campaign-edit.component';
 import { campaignExistsGuard } from "./guards/campaign-exists.guard";
 import { isCampaignOwnerGuard } from "./guards/is-campaign-owner.guard";
+import { SharedModule } from "../shared/shared.module";
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { isCampaignOwnerGuard } from "./guards/is-campaign-owner.guard";
         TextFieldModule,
         MatPaginatorModule,
         MatGridListModule,
-        MatDialogModule
+        MatDialogModule,
+        SharedModule
     ],
     providers:[CampaignService, campaignExistsGuard, isCampaignOwnerGuard]
 })

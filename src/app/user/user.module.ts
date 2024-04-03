@@ -18,6 +18,7 @@ import { isGuestGuard } from './guards/is-guest.guard';
 import { isAuthGuard } from './guards/is-auth.guard';
 import { IsEmailDirective } from './directives/is-email.directive';
 import { IsPasswordDirective } from './directives/is-password.directive';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -37,7 +38,8 @@ import { IsPasswordDirective } from './directives/is-password.directive';
     MatButtonModule,
     MatCardModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    SharedModule
   ],
   providers:[AuthService, UserService, isGuestGuard, isAuthGuard]
 })
