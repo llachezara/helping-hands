@@ -27,7 +27,12 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>Helping Hands</span>
-      <div *ngIf="!loggedInUser" class="guest-button-container">
+      <div *ngIf="!loggedInUser" 
+        class="guest-button-container"
+        [class]="
+            menuToggled ? 'nav-button-container-guest-small' : 'nav-button-guest-container'
+          "
+      >
         <app-nav-button text="Login" routerLink="user/login" />
         <app-nav-button text="Register" routerLink="user/register" />
       </div>

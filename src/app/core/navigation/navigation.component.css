@@ -29,3 +29,12 @@
 .nav-button-container-small{
   margin-left: 52vw;
 }
+
+.nav-button-guest-container{
+  margin-left: 70vw;
+  overflow: hidden;
+}
+
+.nav-button-container-guest-small{
+  margin-left: 58vw;
+}
