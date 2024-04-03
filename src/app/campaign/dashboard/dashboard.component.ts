@@ -1,7 +1,7 @@
-import { Component, OnInit,} from '@angular/core';
+import { Component, OnDestroy, OnInit,} from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { CampaignService } from '../campaign.service';
-import { Observable, tap } from 'rxjs';
+import { Observable, Subscription, tap } from 'rxjs';
 import { DocumentData } from 'firebase/firestore';
 
 
@@ -10,10 +10,12 @@ import { DocumentData } from 'firebase/firestore';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit, OnDestroy{
+  subscriptions: Subscription[] = [];
+  isLoading = true;
   itemsPerPage: number = 10;
   pageIndex: number = 0;
-  campaigns$: Observable<DocumentData[]> | undefined = undefined;
+  campaigns: DocumentData[] | undefined = undefined;
 
   constructor(private campaignService: CampaignService){}
 
@@ -30,8 +32,18 @@ export class DashboardComponent implements OnInit{
   }
   
   getCampaigns(){
-    this.campaigns$ = this.campaignService.getAllCampaigns();
-    console.log(this.campaigns$);
-    
+    const getAllSubscription = this.campaignService.getAllCampaigns().subscribe({
+      next:(campaigns)=>{ 
+        this.campaigns = campaigns;
+        this.isLoading = false;
+      },
+      error:(error)=>{console.log(error)}
+    });
+
+    this.subscriptions.push(getAllSubscription);
+  }
+
+  ngOnDestroy():void{
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

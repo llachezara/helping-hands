@@ -34,9 +34,19 @@ mat-grid-list{
     background-color: transparent;
 }
 mat-grid-tile{
+    border-color: blueviolet;
     background-color: transparent;
 }
 mat-grid-tile *{
     max-width: 90%;
     max-height: 90%;
+}
+
+.holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 80vw;
+    height: 50vh;
 }
