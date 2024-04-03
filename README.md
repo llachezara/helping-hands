@@ -8,7 +8,7 @@ HelpingHands is a platform dedicated to connecting compassionate volunteers with
 ## Features
 - User Registration and Authentication - Users can login, register and logout, based on their authentication status. If a user has not logged in, they are considered a 'guest' and can login or register, clicking on the buttons in the navigation bar. Only logged in or registered users can logout. After login, register and logout, a user will be redirected to the home page.
 
-- User Opportunities - From the toggle side-nav, **all users can visit campaigns page, contacts page and home page**. In the campaigns page, they can see all of the created campaigns.
+- User Opportunities - From the toggle side-nav, **all users can visit campaigns page, contacts page and home page**. In the campaigns page, they can see all of the created campaigns. **Paginator does not work!!**
     
   - Creating a Campaign -  Users can create a campaign, **only if they are already logged in their profile(if they are not a guest)**. Clicking on the *create* button in the navigation bar, will open the create page. A user must provide a title, description, start date, end date, their contact telephone and a region. They can also provide an image url(it is optional). By default if not provided - the image url will be set to a default campaign's image, containing the logo of HelpingHands. An owner can view their created campaigns in their profile page. Owners of campaigns must have in mind, that a **campaign's maximum duration is 30 days from the start date** and after that they won't be able to edit their campaign data - the campaign will end. **If a campaign has ended, other users won't be able to sign up for it.**
     
