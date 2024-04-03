@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { NavButtonComponent } from './nav-button/nav-button.component';
 import { ShortenStringPipe } from './shorten.pipe';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
     NavButtonComponent,
-    ShortenStringPipe
+    ShortenStringPipe,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -15,7 +17,8 @@ import { ShortenStringPipe } from './shorten.pipe';
   ],
   exports: [
     NavButtonComponent,
-    ShortenStringPipe
+    ShortenStringPipe,
+    LoaderComponent
   ]
 })
 export class SharedModule { }
