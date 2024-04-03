@@ -22,6 +22,7 @@ export class CampaignEditComponent implements OnInit, OnDestroy{
   subscriptions: Subscription[] = [];
   campaignHasEnded = false;
   campaignId: string | null | undefined;
+  defaultImageValue = '../../../assets/default-image.png';
 
   matcher = new CustomErrorStateMatcher();
   regions: String[] = regions;
@@ -49,7 +50,7 @@ export class CampaignEditComponent implements OnInit, OnDestroy{
 
         const startDate = doc.startDate.toDate();
         const endDate = doc.endDate.toDate();
-        const imageUrl = doc.imageUrl === '../../../assets/default-image.png' ? '' : doc.imageUrl;
+        const imageUrl = doc.imageUrl === this.defaultImageValue ? '' : doc.imageUrl;
         console.log(startDate, endDate);
 
         this.editForm.setValue({
@@ -77,6 +78,8 @@ export class CampaignEditComponent implements OnInit, OnDestroy{
     }
     
     const newData = this.editForm.value;
+    this.editForm.value.imageUrl = this.editForm.value.imageUrl === '' ? this.defaultImageValue : this.editForm.value.imageUrl;
+
     const updateCampaignSubscription = this.campaignService.updateCampaignById(this.campaignId!, newData as CampaignEditPartial).subscribe({
       next: ()=> {
         console.log(`Updated campaign ${this.campaignId}`);
