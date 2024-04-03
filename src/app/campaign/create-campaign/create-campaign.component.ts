@@ -28,7 +28,7 @@ export class CreateCampaignComponent implements OnDestroy{
 
   createForm = this.fb.group({
     title:['', [Validators.required, Validators.minLength(10), Validators.maxLength(64), ValidateTitle]],
-    imageUrl: ['', [Validators.required, ValidateImageUrl]],
+    imageUrl: ['', [ ValidateImageUrl]],
     description:['', [Validators.required, Validators.minLength(20), Validators.maxLength(100), ValidateDescription]],
     startDate:[ new Date(), [Validators.required]],
     endDate:[new Date(), [Validators.required]],
@@ -47,7 +47,9 @@ export class CreateCampaignComponent implements OnDestroy{
   }
 
   onSubmit():void{
-    console.log(this.createForm.value)
+    if (this.createForm.value.imageUrl == '') {
+      this.createForm.value.imageUrl = "../../../assets/default-image.png";
+    }
 
     const createSubscription = this.campaignService.createCampaign(this.createForm.value).subscribe({
       next:()=>{

@@ -10,6 +10,7 @@
       <div class="general">
         <h3>Title:</h3>
         <mat-form-field class="longer-input">
+          <mat-label>Title</mat-label>
           <input matInput [errorStateMatcher]="matcher" formControlName="title"/>
           <mat-error *ngIf="this.createForm.controls.title.hasError('required') && this.createForm.controls.title.touched">
             Title is required
@@ -25,13 +26,9 @@
           </mat-error>
         </mat-form-field>
 
-
         <h3>Image URL:</h3>
         <mat-form-field class="longer-input" >
-          <input matInput formControlName="imageUrl" [errorStateMatcher]="matcher"/>
-          <mat-error mat-error *ngIf="this.createForm.controls.imageUrl.hasError('required') && this.createForm.controls.imageUrl.touched">
-            Image URL is required
-          </mat-error>
+          <input matInput formControlName="imageUrl" [errorStateMatcher]="matcher" placeholder="https://..."/>
           <mat-error mat-error *ngIf="this.createForm.controls.imageUrl.hasError('invalidImgUrl') && this.createForm.controls.imageUrl.dirty && !this.createForm.controls.imageUrl.hasError('required')">
             Image URL must be a valid image URL
           </mat-error>
@@ -39,6 +36,7 @@
 
         <h3>Description:</h3>
         <mat-form-field class="bigger-textarea">
+          <mat-label>Description</mat-label>
           <textarea [errorStateMatcher]="matcher"
             cdkTextareaAutosize
             #autosize="cdkTextareaAutosize"
@@ -94,12 +92,13 @@
         <div class="personal">
           <h3>Contact telephone:</h3>
           <mat-form-field class="longer-input">
+            <mat-label>Telephone</mat-label>
             <input matInput formControlName="phoneNumber" [errorStateMatcher]="matcher"/>
             <mat-error *ngIf="this.createForm.controls.phoneNumber.hasError('required')">
-              Number is required
+              Telephone is required
             </mat-error>
             <mat-error *ngIf="!this.createForm.controls.phoneNumber.hasError('required') && this.createForm.controls.phoneNumber.errors?.['invalidNumber']">
-              Number must start with '08' and be {{this.createForm.controls.phoneNumber.errors?.['invalidNumber'].requiredLength}} digits long
+              Telephone must start with '08' and be {{this.createForm.controls.phoneNumber.errors?.['invalidNumber'].requiredLength}} digits long
             </mat-error>
           </mat-form-field>
 
@@ -119,6 +118,7 @@
           <button
             mat-raised-button
             color="primary"
+            [class]="!this.createForm.valid ? 'invalid' : 'valid'"
             [disabled]="!this.createForm.valid"
           >
             CREATE

@@ -39,7 +39,7 @@ h3 {
 .longer-input{
     max-width: 25vw;
     width: 25vw;
-    height: 10vh;
+    height: 11vh;
 }
 
 .bigger-textarea{
@@ -79,10 +79,14 @@ h3 {
     justify-content: right;
 }
 
-.actions button{
+.valid{
     width: 100px;
     height: 40px;
     background-color: #18a93a;
+}
+
+.invalid{
+    background-color: #aaa7a7;
 }
 
 #region{
