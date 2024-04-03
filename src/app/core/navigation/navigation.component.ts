@@ -1,6 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { AuthService } from 'src/app/user/auth.service';
@@ -13,7 +13,8 @@ import { MatSidenav } from '@angular/material/sidenav';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent implements OnInit{
+export class NavigationComponent implements OnInit, OnDestroy{
+  subscriptions: Subscription[] = [];
   private breakpointObserver = inject(BreakpointObserver);
   menuToggled = false;
 
@@ -38,11 +39,17 @@ export class NavigationComponent implements OnInit{
   }
 
   logout(){
-    this.auth.logout().subscribe({
+    const logoutSubscription = this.auth.logout().subscribe({
       next:()=>{ 
         this.router.navigate(['/home']);
         console.log('Logout');
       }
     });
+
+    this.subscriptions.push(logoutSubscription);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription=> subscription.unsubscribe())
   }
 }

@@ -9,7 +9,7 @@ import { UserService } from './user.service';
   providedIn:'root'
 })
 export class AuthService implements OnDestroy{
-  userSubscription: Subscription
+  subscriptions: Subscription[] = []
   user$ = user(this.firebaseAuth).pipe(
     map((user)=>{
       let newUser: UserInterface | null = user ? {email: user.email!, uid: user.uid!} : user;
@@ -24,7 +24,8 @@ export class AuthService implements OnDestroy{
   }
 
   constructor(private firebaseAuth: Auth, private router: Router, private userService: UserService) {
-    this.userSubscription = this.user$.subscribe((user)=> {this.currentUser = user})
+    const userSubscription = this.user$.subscribe((user)=> {this.currentUser = user});
+    this.subscriptions.push(userSubscription);
   }
   
   login(email: string, password: string): Observable<void> {
@@ -48,6 +49,6 @@ export class AuthService implements OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.userSubscription.unsubscribe();
+    this.subscriptions.forEach(subscription=> subscription.unsubscribe());
   }
 }

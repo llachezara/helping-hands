@@ -10,24 +10,25 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit, OnDestroy{
   title = 'helping-hands';
-  userSubscription: Subscription | undefined
+  subscriptions: Subscription[] = []
   isAuthenticating = true;
 
   constructor(private auth: AuthService){}
 
   ngOnInit(): void {
 
-    this.userSubscription = this.auth.user$.subscribe({
+    const userSubscription = this.auth.user$.subscribe({
       next:()=> this.isAuthenticating = false,
       error:(error)=>{
         this.isAuthenticating = false
         console.log("App ngOnInit", error);
       }
     })
+    this.subscriptions.push(userSubscription);
   }
 
   ngOnDestroy(): void {
-    this.userSubscription?.unsubscribe();
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
 }
